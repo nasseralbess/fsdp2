@@ -1,4 +1,24 @@
 ## FSDP2
+
+## To run with nnsight, just wrap the final model with nnsight
+### Sample code:
+```python
+nnsight_model = NNsight(model)
+    print("NNsight model print\n", nnsight_model)
+
+
+    print("Outputs of the model:")
+    c = 0
+    for i in inputs:
+        c += 1
+        print(f"Input {c}:", i)
+        with nnsight_model.trace(i):
+             output = nnsight_model.layers[-1].feed_forward.output.save()
+        print(output)
+```
+
+
+
 To run FSDP2 on transformer model:
 
 ```
