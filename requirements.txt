@@ -2,3 +2,4 @@ torch>=2.7
 numpy
 torchvision
 pandas
+tqdm
