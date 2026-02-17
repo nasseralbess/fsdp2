@@ -1,7 +1,7 @@
 import argparse
 import os
 from torchvision import transforms
-from transformers import AutoModelForCausalLM, AutoTokenizer
+from transformers import AutoModelForCausalLM, AutoTokenizer, AutoConfig
 
 import torch
 import torch.optim as optim
@@ -12,8 +12,13 @@ from utils import inspect_mixed_precision, inspect_model
 from tqdm import tqdm
 from torch.utils.data import Dataset, DataLoader
 from torch.utils.data.distributed import DistributedSampler
+from torch.distributed.device_mesh import init_device_mesh
+from accelerate import init_empty_weights
+from transformers.modeling_utils import load_state_dict
+from transformers.utils import cached_file
+from safetensors.torch import load_file
+from torch.distributed.tensor import distribute_tensor
 
-from nnsight import NNsight
 
 from khaled import UNet, Trainer, PairedImageDataset
 
@@ -42,24 +47,6 @@ def set_modules_to_backward_prefetch(model, num_to_backward_prefetch):
         ]
         layer.set_modules_to_backward_prefetch(layers_to_prefetch)
 
-path = 'archive/face2comics_v1.0.0_by_Sxela/face2comics_v1.0.0_by_Sxela/'
-comics_path = path + 'comics/'
-face_path = path + 'face/'
-comics = []
-face = []
-for i in os.listdir(comics_path):
-    comics.append(comics_path + i)
-
-for i in os.listdir(face_path):
-    face.append(face_path + i)
-
-face_train = face[:1000]
-comics_train = comics[:1000]
-
-transform = transforms.Compose([
-    transforms.Resize((512, 512)),
-    transforms.ToTensor(),
-])
     
 def load_train_objs():
     train_set = PairedImageDataset(face_paths=face_train, comic_paths=comics_train, transform=transform)  
@@ -79,9 +66,9 @@ def prepare_dataloader(dataset: Dataset, batch_size: int):
 
 
 def main(args):
-    os.environ["TP_SOCKET_IFNAME"]="eno1" 
-    os.environ["NCCL_SOCKET_IFNAME"]="eno1"
-    os.environ["GLOO_SOCKET_IFNAME"]="eno1"
+    os.environ["TP_SOCKET_IFNAME"]="lo0" 
+    os.environ["NCCL_SOCKET_IFNAME"]="lo0"
+    os.environ["GLOO_SOCKET_IFNAME"]="lo0"
     os.environ["NCCL_DEBUG"]="INFO"
     _min_gpu_count = 1
     if not verify_min_gpu_count(min_gpus=_min_gpu_count):
@@ -89,24 +76,22 @@ def main(args):
         exit()
     # rank = int(os.environ["LOCAL_RANK"])
     rank=0
-    if torch.accelerator.is_available():
-        device_type = torch.accelerator.current_accelerator()
-        device = torch.device(f"{device_type}:{rank}")
-        torch.accelerator.device_index(rank)
-        print(f"Running on rank {rank} on device {device}")
-    else:
-        device = torch.device("cpu")
-        print(f"Running on device {device}")
+    # if torch.accelerator.is_available():
+    #     # device_type = torch.accelerator.current_accelerator()
+        # device = torch.device(f"{device_type}:{rank}")
+        # torch.accelerator.device_index(rank)
+        # print(f"Running on rank {rank} on device {device}")
+    # else:
+    device = torch.device("cpu")
+    print(f"Running on device {device}")
 
-    backend = torch.distributed.get_default_backend_for_device(device)
-    torch.distributed.init_process_group(backend=backend, device_id=device, init_method='tcp://192.168.1.13:12355', rank=0, world_size=1)
-    
-    # with torch.device("meta"):
-    model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen2.5-0.5B-Instruct", device_map="auto")
-    
+    # backend = torch.distributed.get_default_backend_for_device(device)
+    torch.distributed.init_process_group(backend="gloo",  init_method='tcp://127.0.0.1:12355', rank=0, world_size=1)
+    config = AutoConfig.from_pretrained("Qwen/Qwen2.5-0.5B-Instruct")
+    with torch.device("meta"):
+        model = AutoModelForCausalLM.from_config(config)
 
     torch.manual_seed(0)
-    
 
     fsdp_kwargs = {}
     if args.mixed_precision:
@@ -114,30 +99,52 @@ def main(args):
             param_dtype=torch.bfloat16,
             reduce_dtype=torch.float32,
         )
+        
+    mesh = init_device_mesh("cpu", mesh_shape=(1,))
+    
     for layer in model.model.layers:
-        fully_shard(layer, **fsdp_kwargs)
+        fully_shard(layer, mesh=mesh, **fsdp_kwargs)
     
-    fully_shard(model.lm_head, **fsdp_kwargs)
-    fully_shard(model.model, **fsdp_kwargs)
-    fully_shard(model, **fsdp_kwargs)
+    fully_shard(model.lm_head, mesh=mesh, **fsdp_kwargs)
+    fully_shard(model.model, mesh=mesh, **fsdp_kwargs)
+    fully_shard(model, mesh=mesh, **fsdp_kwargs)
 
+    model.to_empty(device=device)
+
+    from safetensors import safe_open
+
+    archive_file = cached_file("Qwen/Qwen2.5-0.5B-Instruct", "model.safetensors")
+    named_params = dict(model.named_parameters())
+    with safe_open(archive_file, framework="pt", device="cpu") as f:
+        for key in f.keys():
+            if key not in named_params:
+                continue
+            tensor = f.get_tensor(key)
+            param = named_params[key]
+            dtensor = distribute_tensor(tensor, param.device_mesh, param.placements)
+            state_dict_chunk = {key: dtensor}
+            
+            if key == "model.embed_tokens.weight" and "lm_head.weight" in named_params:
+                lm_head_param = named_params["lm_head.weight"]
+                state_dict_chunk["lm_head.weight"] = distribute_tensor(
+                    tensor, lm_head_param.device_mesh, lm_head_param.placements
+                )
+                
+            model.load_state_dict(state_dict_chunk, strict=False)
+                
+            model.load_state_dict(state_dict_chunk, strict=False)
+            del tensor
     
-
-    inspect_model(model)
     
     if args.explicit_prefetching:
         set_modules_to_forward_prefetch(model, num_to_forward_prefetch=2)
         set_modules_to_backward_prefetch(model, num_to_backward_prefetch=2)
     print("before checkpointer")
-    # checkpointer = Checkpointer("checkpoints", dcp_api=args.dcp_api)
-    # if checkpointer.last_training_time is None:
-    #     model.to_empty(device=device)
-    #     model.reset_parameters()
-    # else:
-    #     print("loading model")
-    #     checkpointer.load_model(model)
-    #     print("model loaded")
+   
 
+    
+
+    inspect_model(model)
     from torch.distributed.tensor import DTensor
 
     local_params = 0
@@ -154,7 +161,6 @@ def main(args):
 
     tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen2.5-0.5B-Instruct")
     
-    optimizer = optim.Adam(model.parameters(), lr=0.00005)
     if args.mixed_precision:
         inspect_mixed_precision(model)
     # if checkpointer.last_training_time is not None:
@@ -175,8 +181,11 @@ def main(args):
         add_generation_prompt=True
     )
     model_inputs = tokenizer([text], return_tensors="pt").to(model.device)
-    out = model(**model_inputs)
+    model.eval()
+    with torch.no_grad():
+        out = model(**model_inputs)
     print(out)
+    # print(tokenizer.decode(out[0], skip_special_tokens=True))
     torch.distributed.destroy_process_group()
 
 

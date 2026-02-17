@@ -1,7 +1,6 @@
 import argparse
 import os
 from torchvision import transforms
-from transformers import AutoModelForCausalLM, AutoTokenizer
 
 import torch
 import torch.optim as optim
@@ -12,8 +11,6 @@ from utils import inspect_mixed_precision, inspect_model
 from tqdm import tqdm
 from torch.utils.data import Dataset, DataLoader
 from torch.utils.data.distributed import DistributedSampler
-
-from nnsight import NNsight
 
 from khaled import UNet, Trainer, PairedImageDataset
 
@@ -42,7 +39,7 @@ def set_modules_to_backward_prefetch(model, num_to_backward_prefetch):
         ]
         layer.set_modules_to_backward_prefetch(layers_to_prefetch)
 
-path = 'archive/face2comics_v1.0.0_by_Sxela/face2comics_v1.0.0_by_Sxela/'
+path = 'face2comics_v1.0.0_by_Sxela/'
 comics_path = path + 'comics/'
 face_path = path + 'face/'
 comics = []
@@ -79,10 +76,10 @@ def prepare_dataloader(dataset: Dataset, batch_size: int):
 
 
 def main(args):
-    os.environ["TP_SOCKET_IFNAME"]="eno1" 
-    os.environ["NCCL_SOCKET_IFNAME"]="eno1"
-    os.environ["GLOO_SOCKET_IFNAME"]="eno1"
-    os.environ["NCCL_DEBUG"]="INFO"
+    os.environ["TP_SOCKET_IFNAME"]="lo0" 
+    # os.environ["NCCL_SOCKET_IFNAME"]="lo0"
+    os.environ["GLOO_SOCKET_IFNAME"]="lo0"
+    # os.environ["NCCL_DEBUG"]="INFO"
     _min_gpu_count = 1
     if not verify_min_gpu_count(min_gpus=_min_gpu_count):
         print(f"Unable to locate sufficient {_min_gpu_count} gpus to run this example. Exiting.")
@@ -98,14 +95,29 @@ def main(args):
         device = torch.device("cpu")
         print(f"Running on device {device}")
 
-    backend = torch.distributed.get_default_backend_for_device(device)
-    torch.distributed.init_process_group(backend=backend, device_id=device, init_method='tcp://192.168.1.13:12355', rank=0, world_size=1)
-    
-    # with torch.device("meta"):
-    model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen2.5-0.5B-Instruct", device_map="auto")
-    
+    backend = "gloo"#torch.distributed.get_default_backend_for_device(device)
+    torch.distributed.init_process_group(backend=backend, init_method='tcp://127.0.0.1:12355', rank=0, world_size=1)
 
+    with torch.device("meta"):
+        dataset, model = load_train_objs()
+    train_data = prepare_dataloader(dataset, args.batch_size)
+    # trainer = Trainer(model, train_data, optimizer, args.save_every, args.snapshot_path)
+    # trainer.train(args.total_epochs)
+    # t = next(iter(train_data))[0][0]
+    # inp = t.view(1,t.shape[0],t.shape[1],t.shape[2])
+    # trainer._inference(inp)
+    # destroy_process_group()
     torch.manual_seed(0)
+    # vocab_size = 1024
+    # batch_size = 32
+    # seq_len = 64
+    # model_args = ModelArgs(
+    #     n_layers=10,
+    #     n_heads=4,
+    #     vocab_size=vocab_size,
+    #     max_seq_len=seq_len,
+    #     dropout_p=0,
+    # )
     
 
     fsdp_kwargs = {}
@@ -114,11 +126,12 @@ def main(args):
             param_dtype=torch.bfloat16,
             reduce_dtype=torch.float32,
         )
-    for layer in model.model.layers:
+    for layer in model.encoder:
         fully_shard(layer, **fsdp_kwargs)
-    
-    fully_shard(model.lm_head, **fsdp_kwargs)
-    fully_shard(model.model, **fsdp_kwargs)
+    for layer in model.decoder:
+        fully_shard(layer, **fsdp_kwargs)
+    fully_shard(model.encoder, **fsdp_kwargs)
+    fully_shard(model.decoder, **fsdp_kwargs)
     fully_shard(model, **fsdp_kwargs)
 
     
@@ -129,14 +142,14 @@ def main(args):
         set_modules_to_forward_prefetch(model, num_to_forward_prefetch=2)
         set_modules_to_backward_prefetch(model, num_to_backward_prefetch=2)
     print("before checkpointer")
-    # checkpointer = Checkpointer("checkpoints", dcp_api=args.dcp_api)
-    # if checkpointer.last_training_time is None:
-    #     model.to_empty(device=device)
-    #     model.reset_parameters()
-    # else:
-    #     print("loading model")
-    #     checkpointer.load_model(model)
-    #     print("model loaded")
+    checkpointer = Checkpointer("checkpoints", dcp_api=args.dcp_api)
+    if checkpointer.last_training_time is None:
+        model.to_empty(device=device)
+        model.reset_parameters()
+    else:
+        print("loading model")
+        checkpointer.load_model(model)
+        print("model loaded")
 
     from torch.distributed.tensor import DTensor
 
@@ -152,31 +165,40 @@ def main(args):
         f"local shard params = {local_params}"
     )
 
-    tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen2.5-0.5B-Instruct")
+
     
     optimizer = optim.Adam(model.parameters(), lr=0.00005)
     if args.mixed_precision:
         inspect_mixed_precision(model)
-    # if checkpointer.last_training_time is not None:
-    #     checkpointer.load_optim(model, optimizer)
+    if checkpointer.last_training_time is not None:
+        checkpointer.load_optim(model, optimizer)
     print("after optim load")
-    print("in inference")
-    if args.explicit_prefetching:
-        model.unshard()
-    prompt = "Give me a short introduction to large language model."
-    messages = [
-        {"role": "system", "content": "You are Qwen, created by Alibaba Cloud. You are a helpful assistant."},
-        {"role": "user", "content": prompt}
-    ]
-
-    text = tokenizer.apply_chat_template(
-        messages,
-        tokenize=False,
-        add_generation_prompt=True
-    )
-    model_inputs = tokenizer([text], return_tensors="pt").to(model.device)
-    out = model(**model_inputs)
-    print(out)
+    # for _ in tqdm(range(10)):
+    #     print("in training")
+    #     if args.explicit_prefetching:
+    #         model.unshard()
+    #     x = torch.randint(0, vocab_size, (batch_size, seq_len), device=device)
+    #     loss = model(x).sum()
+    #     loss.backward()
+    #     torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
+    #     optim.step()
+    #     optim.zero_grad()
+    criterion = torch.nn.MSELoss()
+    # print(optimizer.state_dict())
+    for epoch in tqdm(range(0, 2)):
+        train_data.sampler.set_epoch(epoch)
+        for source, targets in train_data:
+            source = source.to(0)
+            targets = targets.to(0)
+            optimizer.zero_grad()
+            output = model(source)
+            loss = criterion(output, targets)
+            loss.backward()
+            optimizer.step()
+        # if local_rank == 0 and epoch % self.save_every == 0:
+        #     self._save_snapshot(epoch)
+    # print(optimizer.state_dict())
+    checkpointer.save(model, optimizer)
     torch.distributed.destroy_process_group()
 
 
