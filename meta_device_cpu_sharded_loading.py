@@ -1,7 +1,7 @@
 import argparse
 import os
 from torchvision import transforms
-from transformers import AutoModelForCausalLM, AutoTokenizer, AutoConfig
+from transformers import AutoModelForCausalLM, AutoTokenizer, AutoConfig, Qwen3VLForConditionalGeneration, AutoProcessor
 
 import torch
 import torch.optim as optim
@@ -18,6 +18,8 @@ from transformers.modeling_utils import load_state_dict
 from transformers.utils import cached_file
 from safetensors.torch import load_file
 from torch.distributed.tensor import distribute_tensor
+from safetensors import safe_open
+import json
 
 
 from khaled import UNet, Trainer, PairedImageDataset
@@ -66,9 +68,9 @@ def prepare_dataloader(dataset: Dataset, batch_size: int):
 
 
 def main(args):
-    os.environ["TP_SOCKET_IFNAME"]="lo0" 
-    os.environ["NCCL_SOCKET_IFNAME"]="lo0"
-    os.environ["GLOO_SOCKET_IFNAME"]="lo0"
+    os.environ["TP_SOCKET_IFNAME"]="eno1" 
+    os.environ["NCCL_SOCKET_IFNAME"]="eno1"
+    os.environ["GLOO_SOCKET_IFNAME"]="eno1"
     os.environ["NCCL_DEBUG"]="INFO"
     _min_gpu_count = 1
     if not verify_min_gpu_count(min_gpus=_min_gpu_count):
@@ -76,20 +78,22 @@ def main(args):
         exit()
     # rank = int(os.environ["LOCAL_RANK"])
     rank=0
-    # if torch.accelerator.is_available():
-    #     # device_type = torch.accelerator.current_accelerator()
-        # device = torch.device(f"{device_type}:{rank}")
-        # torch.accelerator.device_index(rank)
-        # print(f"Running on rank {rank} on device {device}")
-    # else:
-    device = torch.device("cpu")
-    print(f"Running on device {device}")
-
-    # backend = torch.distributed.get_default_backend_for_device(device)
-    torch.distributed.init_process_group(backend="gloo",  init_method='tcp://127.0.0.1:12355', rank=0, world_size=1)
-    config = AutoConfig.from_pretrained("Qwen/Qwen2.5-0.5B-Instruct")
+    if torch.accelerator.is_available():
+        device_type = torch.accelerator.current_accelerator()
+        device = torch.device(f"{device_type}:{rank}")
+        torch.accelerator.device_index(rank)
+        print(f"Running on rank {rank} on device {device}")
+    else:
+        device = torch.device("cpu")
+        print(f"Running on device {device}")
+    model_id = "Qwen/Qwen3-VL-8B-Thinking"
+    backend = torch.distributed.get_default_backend_for_device(device)
+    torch.distributed.init_process_group(backend=backend,  init_method='tcp://192.168.1.10:12355', rank=2, world_size=4)
+    config = AutoConfig.from_pretrained(model_id)
+    config.tie_word_embeddings = False
     with torch.device("meta"):
-        model = AutoModelForCausalLM.from_config(config)
+        model = Qwen3VLForConditionalGeneration._from_config(config)
+    torch.set_default_dtype(torch.float32)
 
     torch.manual_seed(0)
 
@@ -100,41 +104,65 @@ def main(args):
             reduce_dtype=torch.float32,
         )
         
-    mesh = init_device_mesh("cpu", mesh_shape=(1,))
+    # mesh = init_device_mesh(device_type=device.type,mesh_shape=(1,))
     
-    for layer in model.model.layers:
-        fully_shard(layer, mesh=mesh, **fsdp_kwargs)
-    
-    fully_shard(model.lm_head, mesh=mesh, **fsdp_kwargs)
-    fully_shard(model.model, mesh=mesh, **fsdp_kwargs)
-    fully_shard(model, mesh=mesh, **fsdp_kwargs)
+    for block in model.model.visual.blocks:
+        fully_shard(block, **fsdp_kwargs)
+
+    for merger in model.model.visual.deepstack_merger_list:
+        fully_shard(merger, **fsdp_kwargs)
+
+    fully_shard(model.model.visual.merger, **fsdp_kwargs)
+    fully_shard(model.model.visual.patch_embed, **fsdp_kwargs)
+    fully_shard(model.model.visual, **fsdp_kwargs)
+
+    fully_shard(model.model.language_model.embed_tokens, **fsdp_kwargs)
+    fully_shard(model.model.language_model.norm, **fsdp_kwargs)
+
+    for layer in model.model.language_model.layers:
+        fully_shard(layer, **fsdp_kwargs)
+
+    fully_shard(model.model.language_model, **fsdp_kwargs)
+    fully_shard(model.model, **fsdp_kwargs)
+    fully_shard(model.lm_head, **fsdp_kwargs)
+    fully_shard(model, **fsdp_kwargs)
 
     model.to_empty(device=device)
 
-    from safetensors import safe_open
-
-    archive_file = cached_file("Qwen/Qwen2.5-0.5B-Instruct", "model.safetensors")
-    named_params = dict(model.named_parameters())
-    with safe_open(archive_file, framework="pt", device="cpu") as f:
-        for key in f.keys():
-            if key not in named_params:
-                continue
-            tensor = f.get_tensor(key)
-            param = named_params[key]
-            dtensor = distribute_tensor(tensor, param.device_mesh, param.placements)
-            state_dict_chunk = {key: dtensor}
-            
-            if key == "model.embed_tokens.weight" and "lm_head.weight" in named_params:
-                lm_head_param = named_params["lm_head.weight"]
-                state_dict_chunk["lm_head.weight"] = distribute_tensor(
-                    tensor, lm_head_param.device_mesh, lm_head_param.placements
-                )
-                
-            model.load_state_dict(state_dict_chunk, strict=False)
-                
-            model.load_state_dict(state_dict_chunk, strict=False)
-            del tensor
     
+
+    try:
+        index_file = cached_file(model_id, "model.safetensors.index.json")
+        with open(index_file, "r") as f:
+            weight_map = json.load(f)["weight_map"]
+        unique_files = unique_files = sorted(list(set(weight_map.values())))
+    except Exception:
+        unique_files = ["model.safetensors"]
+
+    named_params = dict(model.named_parameters())
+
+    for filename in unique_files:
+        archive_file = cached_file(model_id, filename)
+        
+        with safe_open(archive_file, framework="pt", device="cuda:0") as f:
+            for key in f.keys():
+                if key not in named_params:
+                    continue
+                    
+                tensor = f.get_tensor(key)
+                param = named_params[key]
+                dtensor = distribute_tensor(tensor, param.device_mesh, param.placements)
+                
+                state_dict_chunk = {key: dtensor}
+                
+                if key == "model.language_model.embed_tokens.weight" and "lm_head.weight" in named_params:
+                    lm_head_param = named_params["lm_head.weight"]
+                    state_dict_chunk["lm_head.weight"] = distribute_tensor(
+                        tensor, lm_head_param.device_mesh, lm_head_param.placements
+                    )
+                    
+                model.load_state_dict(state_dict_chunk, strict=False)
+                del tensor
     
     if args.explicit_prefetching:
         set_modules_to_forward_prefetch(model, num_to_forward_prefetch=2)
@@ -159,7 +187,7 @@ def main(args):
         f"local shard params = {local_params}"
     )
 
-    tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen2.5-0.5B-Instruct")
+    processor = AutoProcessor.from_pretrained(model_id)
     
     if args.mixed_precision:
         inspect_mixed_precision(model)
@@ -169,21 +197,39 @@ def main(args):
     print("in inference")
     if args.explicit_prefetching:
         model.unshard()
-    prompt = "Give me a short introduction to large language model."
     messages = [
-        {"role": "system", "content": "You are Qwen, created by Alibaba Cloud. You are a helpful assistant."},
-        {"role": "user", "content": prompt}
+        {
+            "role": "user",
+            "content": [
+                {
+                    "type": "image",
+                    "image": "https://qianwen-res.oss-cn-beijing.aliyuncs.com/Qwen-VL/assets/demo.jpeg",
+                },
+                {"type": "text", "text": "Describe this image."},
+            ],
+        }
     ]
 
-    text = tokenizer.apply_chat_template(
+    # Preparation for inference
+    inputs = processor.apply_chat_template(
         messages,
-        tokenize=False,
-        add_generation_prompt=True
+        tokenize=True,
+        add_generation_prompt=True,
+        return_dict=True,
+        return_tensors="pt"
     )
-    model_inputs = tokenizer([text], return_tensors="pt").to(model.device)
+    inputs = inputs.to(model.device)
+    # from torch.distributed.tensor import Replicate
+    
+    # mesh = model.lm_head.weight.device_mesh
+
+    # for key, value in inputs.items():
+    #     if isinstance(value, torch.Tensor):
+    #         inputs[key] = distribute_tensor(value, mesh, [Replicate()])
+
     model.eval()
-    with torch.no_grad():
-        out = model(**model_inputs)
+    with torch.no_grad(), torch.autocast("cuda", dtype=torch.bfloat16):
+        out = model(**inputs)
     print(out)
     # print(tokenizer.decode(out[0], skip_special_tokens=True))
     torch.distributed.destroy_process_group()
