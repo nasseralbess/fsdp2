@@ -88,7 +88,7 @@ def main(args):
         print(f"Running on device {device}")
     model_id = "Qwen/Qwen3-VL-8B-Thinking"
     backend = torch.distributed.get_default_backend_for_device(device)
-    torch.distributed.init_process_group(backend=backend,  init_method='tcp://192.168.1.10:12355', rank=2, world_size=4)
+    torch.distributed.init_process_group(backend=backend,  init_method='tcp://192.168.1.10:12355', rank=0, world_size=4)
     config = AutoConfig.from_pretrained(model_id)
     config.tie_word_embeddings = False
     with torch.device("meta"):

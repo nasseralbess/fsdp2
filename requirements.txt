@@ -3,3 +3,7 @@ numpy
 torchvision
 pandas
 tqdm
+deepspeed
+setuptools
+future
+consoleprinter
