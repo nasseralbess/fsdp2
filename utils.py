@@ -11,6 +11,7 @@ import torch
 from huggingface_hub import snapshot_download
 from transformers import AutoConfig, AutoModelForCausalLM, AutoTokenizer, LlamaTokenizerFast, Qwen3VLForConditionalGeneration, AutoProcessor
 from deepspeed.accelerator import get_accelerator
+from safetensors import safe_open
 
 def inspect_model(model: FSDPModule):
     # assert isinstance(model, Transformer)
@@ -39,11 +40,6 @@ Helper classes and functions for DeepSpeed
 
 
 class DSPipeline():
-    '''
-    Example helper class for comprehending DeepSpeed Meta Tensors, meant to mimic HF pipelines.
-    The DSPipeline can run with and without meta tensors.
-    '''
-class DSPipeline():
     def __init__(self,
                  model_name='Qwen/Qwen3-VL-8B-Thinking',
                  dtype=torch.bfloat16,
@@ -64,15 +60,14 @@ class DSPipeline():
         else:
             self.device = torch.device(get_accelerator().device_name(device))
 
-        self.tp_presharded_models = ["microsoft/bloom-deepspeed-inference-int8", "microsoft/bloom-deepspeed-inference-fp16"]
-
         self.processor = AutoProcessor.from_pretrained(self.model_name)
+        self.processor.tokenizer.padding_side = 'left'
 
         if (is_meta):
             self.config = AutoConfig.from_pretrained(self.model_name, trust_remote_code=trust_remote_code)
             self.repo_root, self.checkpoints_json = self._generate_json(checkpoint_path)
 
-            with deepspeed.OnDevice(dtype=torch.bfloat16, device="meta"):
+            with deepspeed.OnDevice(dtype=self.dtype, device="meta"):
                 self.model = Qwen3VLForConditionalGeneration._from_config(self.config)
         else:
             self.model = Qwen3VLForConditionalGeneration.from_pretrained(self.model_name, trust_remote_code=trust_remote_code)
@@ -84,19 +79,33 @@ class DSPipeline():
         elif self.dtype == torch.bfloat16:
             self.model.bfloat16()
 
+    def load_missing_weights(self):
+            from safetensors import safe_open
+            safetensor_files = [os.path.join(self.repo_root, f) for f in os.listdir(self.repo_root) if f.endswith(".safetensors")]
+            for file in safetensor_files:
+                with safe_open(file, framework="pt", device="cpu") as f:
+                    for key in f.keys():
+                        try:
+                            param = self.model.get_parameter(key)
+                            if param.device.type == 'meta':
+                                tensor = f.get_tensor(key).to(self.device, dtype=self.dtype)
+                                attrs = key.split('.')
+                                module = self.model
+                                for attr in attrs[:-1]:
+                                    module = getattr(module, attr)
+                                setattr(module, attrs[-1], torch.nn.Parameter(tensor))
+                        except AttributeError:
+                            continue
 
     def __call__(self,
-                inputs=["test"],
-                num_tokens=100,
-                do_sample=False):
+                 inputs=["test"],
+                 num_tokens=100,
+                 do_sample=False):
         if isinstance(inputs, str):
-            input_list = [inputs]
-        else:
-            input_list = inputs
+            inputs = [inputs]
 
-        outputs = self.generate_outputs(input_list, num_tokens=num_tokens, do_sample=do_sample)
+        outputs = self.generate_outputs(inputs, num_tokens=num_tokens, do_sample=do_sample)
         return outputs
-
 
     def _generate_json(self, checkpoint_path=None):
         if checkpoint_path is None:
@@ -120,7 +129,6 @@ class DSPipeline():
             json.dump(data, f)
 
         return repo_root, checkpoints_json
-
 
     def generate_outputs(self,
                          inputs=["Describe this image:"],

@@ -3,14 +3,10 @@ import math
 import time
 import torch
 import deepspeed
-from transformers import AutoModelForCausalLM, AutoTokenizer, AutoConfig
+from transformers.models.qwen3_vl.modeling_qwen3_vl import Qwen3VLTextDecoderLayer
 from utils import DSPipeline, Performance
 from deepspeed.runtime.utils import see_memory_usage
 from deepspeed.accelerator import get_accelerator
-from transformers.models.qwen3_vl.modeling_qwen3_vl import (
-    # Qwen3VLVisionBlock,
-    Qwen3VLTextDecoderLayer,
-)
 from arguments import parser
 
 args = parser.parse_args()
@@ -50,7 +46,6 @@ ds_kwargs = dict(base_dir=pipe.repo_root, checkpoint=pipe.checkpoints_json)
 
 injection_policy = {
     Qwen3VLTextDecoderLayer: ("self_attn.o_proj", "mlp.down_proj"),
-    # Qwen3VLVisionBlock: ("attn.proj", "mlp.linear_fc2"),
 }
 
 pipe.model = deepspeed.init_inference(
@@ -64,6 +59,11 @@ pipe.model = deepspeed.init_inference(
     **ds_kwargs
 )
 
+# === CRITICAL FIX: Manually load the unmapped Vision Weights ===
+print(f"[Rank {local_rank}] Loading unmapped vision weights...")
+pipe.load_missing_weights()
+print(f"[Rank {local_rank}] Vision weights loaded.")
+
 if local_rank == 0:
     see_memory_usage("after init_inference", True)
 
@@ -73,7 +73,6 @@ if args.batch_size > len(input_sentences):
     input_sentences *= math.ceil(args.batch_size / len(input_sentences))
 
 inputs = input_sentences[:args.batch_size]
-
 
 iters = 30 if args.test_performance else 2
 times = []
