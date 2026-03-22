@@ -60,51 +60,43 @@ class DSPipeline():
         else:
             self.device = torch.device(get_accelerator().device_name(device))
 
-        self.processor = AutoProcessor.from_pretrained(self.model_name)
+        self.processor = AutoProcessor.from_pretrained(self.model_name, dtype=self.dtype)
         self.processor.tokenizer.padding_side = 'left'
 
         if (is_meta):
-            self.config = AutoConfig.from_pretrained(self.model_name, trust_remote_code=trust_remote_code)
+            # self.config = AutoConfig.from_pretrained(self.model_name, trust_remote_code=trust_remote_code)
             self.repo_root, self.checkpoints_json = self._generate_json(checkpoint_path)
 
-            with deepspeed.OnDevice(dtype=self.dtype, device="meta"):
-                self.model = Qwen3VLForConditionalGeneration._from_config(self.config)
+            # with deepspeed.OnDevice(dtype=self.dtype, device="meta"):
+            #     self.model = Qwen3VLForConditionalGeneration._from_config(self.config)
+            self.model = Qwen3VLForConditionalGeneration.from_pretrained(self.model_name, dtype=torch.bfloat16, device_map = "cpu")
         else:
             self.model = Qwen3VLForConditionalGeneration.from_pretrained(self.model_name, trust_remote_code=trust_remote_code)
 
         self.model.eval()
+        print("\n\ndtype:",self.model.dtype,"\n\n")
 
         if self.dtype == torch.float16:
             self.model.half()
         elif self.dtype == torch.bfloat16:
             self.model.bfloat16()
+        self.model.model.language_model.layers[0].register_forward_hook(self._hook)
+        print("\n\ndtype2:",self.model.dtype,"\n\n")
 
-    def load_missing_weights(self):
-            from safetensors import safe_open
-            safetensor_files = [os.path.join(self.repo_root, f) for f in os.listdir(self.repo_root) if f.endswith(".safetensors")]
-            for file in safetensor_files:
-                with safe_open(file, framework="pt", device="cpu") as f:
-                    for key in f.keys():
-                        try:
-                            param = self.model.get_parameter(key)
-                            if param.device.type == 'meta':
-                                tensor = f.get_tensor(key).to(self.device, dtype=self.dtype)
-                                attrs = key.split('.')
-                                module = self.model
-                                for attr in attrs[:-1]:
-                                    module = getattr(module, attr)
-                                setattr(module, attrs[-1], torch.nn.Parameter(tensor))
-                        except AttributeError:
-                            continue
+
+    def _hook(self, module, input, output):
+        feats = {}
+        feats['feat'] = output.detach().float().cpu().tolist()
+        json.dump(feats, open("activation.json", "w"))
 
     def __call__(self,
                  inputs=["test"],
                  num_tokens=100,
-                 do_sample=False):
+                 do_sample=False, rank=None):
         if isinstance(inputs, str):
             inputs = [inputs]
 
-        outputs = self.generate_outputs(inputs, num_tokens=num_tokens, do_sample=do_sample)
+        outputs = self.generate_outputs(inputs, num_tokens=num_tokens, do_sample=do_sample, rank=rank)
         return outputs
 
     def _generate_json(self, checkpoint_path=None):
@@ -133,44 +125,110 @@ class DSPipeline():
     def generate_outputs(self,
                          inputs=["Describe this image:"],
                          num_tokens=100,
-                         do_sample=False):
-        conversations = [
-            [
-                {
-                    "role": "user",
-                    "content": [
-                        {
-                            "type": "image",
-                            "image": "https://qianwen-res.oss-cn-beijing.aliyuncs.com/Qwen-VL/assets/demo.jpeg",
-                        },
-                        {"type": "text", "text": text_input},
-                    ],
-                }
-            ]
-            for text_input in inputs
+                         do_sample=False, rank=None):
+        # print("generate_outputs called")
+        # conversations = [
+        #     [
+        #         {
+        #             "role": "user",
+        #             "content": [
+        #                 {
+        #                     "type": "image",
+        #                     "image": "https://qianwen-res.oss-cn-beijing.aliyuncs.com/Qwen-VL/assets/demo.jpeg",
+        #                 },
+        #                 {"type": "text", "text": text_input},
+        #             ],
+        #         }
+        #     ]
+        #     for text_input in inputs
+        # ]
+        messages = [
+            {
+                "role": "user",
+                "content": [
+                    {
+                        "type": "image",
+                        # "image": "https://qianwen-res.oss-cn-beijing.aliyuncs.com/Qwen-VL/assets/demo.jpeg",
+                        "image": "demo.jpeg",
+                    },
+                    {"type": "text", "text": "Describe this image."},
+                ],
+            }
         ]
 
+
         inputs = self.processor.apply_chat_template(
-            conversations,
+            messages,
             tokenize=True,
             add_generation_prompt=True,
             return_dict=True,
             return_tensors="pt",
-            padding=True
         )
-        
         inputs = inputs.to(self.device)
-        self.model.to(self.device)
+        print("Keys in inputs:", inputs.keys())
+        if "pixel_values" in inputs:
+            pv = inputs["pixel_values"]
+            print(f"pixel_values shape={pv.shape}, dtype={pv.dtype}, sum={pv.sum().item():.4f}")
+        else:
+            print("WARNING: pixel_values is MISSING from inputs")
+        if "pixel_values" in inputs:
+            inputs["pixel_values"] = inputs["pixel_values"].to(dtype=self.dtype)
+            print(f"pixel_values after cast: dtype={inputs['pixel_values'].dtype}, "
+                f"device={inputs['pixel_values'].device}, "
+                f"sum={inputs['pixel_values'].sum().item():.4f}")
+        print(f"image_grid_thw: {inputs['image_grid_thw']}, device={inputs['image_grid_thw'].device}")
         
+        
+        # self.model.to(self.device)
+        if rank == 1: 
+            save_model_weight_stats(self.model, "qwen3_weight_stats_dist_rank1.json")
         generated_ids = self.model.generate(**inputs, max_new_tokens=num_tokens, do_sample=do_sample)
         generated_ids_trimmed = [
             out_ids[len(in_ids) :] for in_ids, out_ids in zip(inputs.input_ids, generated_ids)
         ]
+        # print("generted_ids:")
+        # for i in generated_ids[0].detach().cpu():
+        #     print(i, end=", ")
+        # print("\n")
         output_text = self.processor.batch_decode(
             generated_ids_trimmed, skip_special_tokens=True, clean_up_tokenization_spaces=False
         )
         
         return output_text
+def save_model_weight_stats(model, output_path="weight_stats.json"):
+    stats_dict = {}
+    
+    for name, param in model.named_parameters():
+        if param.is_meta:
+            if '.' in name:
+                module_name, param_name = name.rsplit('.', 1)
+                module = model.get_submodule(module_name)
+            else:
+                module = model
+                param_name = name
+                
+            if hasattr(module, "_hf_hook") and hasattr(module._hf_hook, "weights_map"):
+                param_data = module._hf_hook.weights_map[param_name].float()
+            else:
+                continue
+        else:
+            param_data = param.data.float()
+        
+        keys = name.split('.')
+        current_level = stats_dict
+        
+        for key in keys[:-1]:
+            if key not in current_level:
+                current_level[key] = {}
+            current_level = current_level[key]
+            
+        current_level[keys[-1]] = {
+            "sum": param_data.sum().item(),
+            "mean": param_data.mean().item()
+        }
+        
+    with open(output_path, 'w') as f:
+        json.dump(stats_dict, f, indent=4)
 
 class Performance():
 

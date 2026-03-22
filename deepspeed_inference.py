@@ -3,12 +3,11 @@ import math
 import time
 import torch
 import deepspeed
-from transformers.models.qwen3_vl.modeling_qwen3_vl import Qwen3VLTextDecoderLayer
+from transformers.models.qwen3_vl.modeling_qwen3_vl import Qwen3VLTextDecoderLayer, Qwen3VLVisionBlock
 from utils import DSPipeline, Performance
 from deepspeed.runtime.utils import see_memory_usage
 from deepspeed.accelerator import get_accelerator
 from arguments import parser
-
 args = parser.parse_args()
 
 os.environ["TP_SOCKET_IFNAME"]="eno1" 
@@ -46,8 +45,14 @@ ds_kwargs = dict(base_dir=pipe.repo_root, checkpoint=pipe.checkpoints_json)
 
 injection_policy = {
     Qwen3VLTextDecoderLayer: ("self_attn.o_proj", "mlp.down_proj"),
+    # Qwen3VLVisionBlock: ("attn.proj", "mlp.linear_fc2")
 }
 
+def print_weight_sample(model, label):
+    w = model.model.language_model.layers[0].input_layernorm.weight
+    print(f"[{label}] input_layernorm[0] sum={w.sum().item():.4f}, device={w.device}, dtype={w.dtype}")
+
+print_weight_sample(pipe.model, "BEFORE deepspeed")
 pipe.model = deepspeed.init_inference(
     pipe.model,
     tensor_parallel={"tp_size": world_size, "tp_grain_size": 8},
@@ -59,10 +64,8 @@ pipe.model = deepspeed.init_inference(
     **ds_kwargs
 )
 
-# === CRITICAL FIX: Manually load the unmapped Vision Weights ===
-print(f"[Rank {local_rank}] Loading unmapped vision weights...")
-pipe.load_missing_weights()
-print(f"[Rank {local_rank}] Vision weights loaded.")
+print_weight_sample(pipe.model.module, "AFTER deepspeed")
+
 
 if local_rank == 0:
     see_memory_usage("after init_inference", True)
@@ -74,22 +77,23 @@ if args.batch_size > len(input_sentences):
 
 inputs = input_sentences[:args.batch_size]
 
-iters = 30 if args.test_performance else 2
+# iters = 30 if args.test_performance else 2
+iters = 1
 times = []
-
 for i in range(iters):
     get_accelerator().synchronize()
     start = time.time()
     outputs = pipe(inputs,
             num_tokens=args.max_new_tokens,
-            do_sample=(not args.greedy))
+            do_sample=(not args.greedy), rank = torch.distributed.get_rank())
     get_accelerator().synchronize()
     end = time.time()
     times.append(end - start)
 
 if local_rank == 0:
-    print(f"generation time is {times[1]} sec")
+    print(f"generation time is {times[-1]} sec")
     for i, o in zip(inputs, outputs):
         print(f"\nin={i}\nout={o}\n{'-'*60}")
     if args.test_performance:
         Performance.print_perf_stats(map(lambda t: t / args.max_new_tokens, times), pipe.model.config, args.dtype, args.batch_size)
+torch.distributed.destroy_process_group()

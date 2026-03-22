@@ -1,0 +1,4554 @@
+{
+    "module": {
+        "model": {
+            "visual": {
+                "patch_embed": {
+                    "proj": {
+                        "weight": {
+                            "sum": 0.0,
+                            "mean": 0.0
+                        },
+                        "bias": {
+                            "sum": 0.0,
+                            "mean": 0.0
+                        }
+                    }
+                },
+                "pos_embed": {
+                    "weight": {
+                        "sum": 0.0,
+                        "mean": 0.0
+                    }
+                },
+                "blocks": {
+                    "0": {
+                        "norm1": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "norm2": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "attn": {
+                            "qkv": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "proj": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "linear_fc1": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "linear_fc2": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        }
+                    },
+                    "1": {
+                        "norm1": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "norm2": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "attn": {
+                            "qkv": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "proj": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "linear_fc1": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "linear_fc2": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        }
+                    },
+                    "2": {
+                        "norm1": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "norm2": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "attn": {
+                            "qkv": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "proj": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "linear_fc1": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "linear_fc2": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        }
+                    },
+                    "3": {
+                        "norm1": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "norm2": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "attn": {
+                            "qkv": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "proj": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "linear_fc1": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "linear_fc2": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        }
+                    },
+                    "4": {
+                        "norm1": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "norm2": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "attn": {
+                            "qkv": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "proj": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "linear_fc1": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "linear_fc2": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        }
+                    },
+                    "5": {
+                        "norm1": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "norm2": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "attn": {
+                            "qkv": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "proj": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "linear_fc1": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "linear_fc2": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        }
+                    },
+                    "6": {
+                        "norm1": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "norm2": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "attn": {
+                            "qkv": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "proj": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "linear_fc1": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "linear_fc2": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        }
+                    },
+                    "7": {
+                        "norm1": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "norm2": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "attn": {
+                            "qkv": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "proj": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "linear_fc1": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "linear_fc2": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        }
+                    },
+                    "8": {
+                        "norm1": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "norm2": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "attn": {
+                            "qkv": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "proj": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "linear_fc1": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "linear_fc2": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        }
+                    },
+                    "9": {
+                        "norm1": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "norm2": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "attn": {
+                            "qkv": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "proj": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "linear_fc1": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "linear_fc2": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        }
+                    },
+                    "10": {
+                        "norm1": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "norm2": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "attn": {
+                            "qkv": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "proj": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "linear_fc1": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "linear_fc2": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        }
+                    },
+                    "11": {
+                        "norm1": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "norm2": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "attn": {
+                            "qkv": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "proj": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "linear_fc1": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "linear_fc2": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        }
+                    },
+                    "12": {
+                        "norm1": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "norm2": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "attn": {
+                            "qkv": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "proj": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "linear_fc1": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "linear_fc2": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        }
+                    },
+                    "13": {
+                        "norm1": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "norm2": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "attn": {
+                            "qkv": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "proj": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "linear_fc1": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "linear_fc2": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        }
+                    },
+                    "14": {
+                        "norm1": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "norm2": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "attn": {
+                            "qkv": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "proj": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "linear_fc1": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "linear_fc2": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        }
+                    },
+                    "15": {
+                        "norm1": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "norm2": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "attn": {
+                            "qkv": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "proj": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "linear_fc1": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "linear_fc2": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        }
+                    },
+                    "16": {
+                        "norm1": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "norm2": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "attn": {
+                            "qkv": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "proj": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "linear_fc1": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "linear_fc2": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        }
+                    },
+                    "17": {
+                        "norm1": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "norm2": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "attn": {
+                            "qkv": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "proj": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "linear_fc1": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "linear_fc2": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        }
+                    },
+                    "18": {
+                        "norm1": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "norm2": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "attn": {
+                            "qkv": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "proj": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "linear_fc1": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "linear_fc2": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        }
+                    },
+                    "19": {
+                        "norm1": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "norm2": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "attn": {
+                            "qkv": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "proj": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "linear_fc1": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "linear_fc2": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        }
+                    },
+                    "20": {
+                        "norm1": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "norm2": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "attn": {
+                            "qkv": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "proj": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "linear_fc1": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "linear_fc2": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        }
+                    },
+                    "21": {
+                        "norm1": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "norm2": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "attn": {
+                            "qkv": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "proj": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "linear_fc1": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "linear_fc2": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        }
+                    },
+                    "22": {
+                        "norm1": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "norm2": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "attn": {
+                            "qkv": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "proj": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "linear_fc1": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "linear_fc2": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        }
+                    },
+                    "23": {
+                        "norm1": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "norm2": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "attn": {
+                            "qkv": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "proj": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "linear_fc1": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "linear_fc2": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        }
+                    },
+                    "24": {
+                        "norm1": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "norm2": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "attn": {
+                            "qkv": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "proj": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "linear_fc1": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "linear_fc2": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        }
+                    },
+                    "25": {
+                        "norm1": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "norm2": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "attn": {
+                            "qkv": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "proj": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "linear_fc1": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "linear_fc2": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        }
+                    },
+                    "26": {
+                        "norm1": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "norm2": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "attn": {
+                            "qkv": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "proj": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "linear_fc1": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "linear_fc2": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                },
+                                "bias": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        }
+                    }
+                },
+                "merger": {
+                    "norm": {
+                        "weight": {
+                            "sum": 0.0,
+                            "mean": 0.0
+                        },
+                        "bias": {
+                            "sum": 0.0,
+                            "mean": 0.0
+                        }
+                    },
+                    "linear_fc1": {
+                        "weight": {
+                            "sum": 0.0,
+                            "mean": 0.0
+                        },
+                        "bias": {
+                            "sum": 0.0,
+                            "mean": 0.0
+                        }
+                    },
+                    "linear_fc2": {
+                        "weight": {
+                            "sum": 0.0,
+                            "mean": 0.0
+                        },
+                        "bias": {
+                            "sum": 0.0,
+                            "mean": 0.0
+                        }
+                    }
+                },
+                "deepstack_merger_list": {
+                    "0": {
+                        "norm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "linear_fc1": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "linear_fc2": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        }
+                    },
+                    "1": {
+                        "norm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "linear_fc1": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "linear_fc2": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        }
+                    },
+                    "2": {
+                        "norm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "linear_fc1": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "linear_fc2": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            },
+                            "bias": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        }
+                    }
+                }
+            },
+            "language_model": {
+                "embed_tokens": {
+                    "weight": {
+                        "sum": 0.0,
+                        "mean": 0.0
+                    }
+                },
+                "layers": {
+                    "0": {
+                        "self_attn": {
+                            "q_proj": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "k_proj": {
+                                "weight": {
+                                    "sum": 16.986557006835938,
+                                    "mean": 8.09982157079503e-06
+                                }
+                            },
+                            "v_proj": {
+                                "weight": {
+                                    "sum": -23.134252548217773,
+                                    "mean": -1.1031271242245566e-05
+                                }
+                            },
+                            "o_proj": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "q_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "k_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "gate_proj": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "up_proj": {
+                                "weight": {
+                                    "sum": 302.4172058105469,
+                                    "mean": 1.2016980690532364e-05
+                                }
+                            },
+                            "down_proj": {
+                                "weight": {
+                                    "sum": -188.02838134765625,
+                                    "mean": -7.471576736861607e-06
+                                }
+                            }
+                        },
+                        "input_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "post_attention_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        }
+                    },
+                    "1": {
+                        "self_attn": {
+                            "q_proj": {
+                                "weight": {
+                                    "sum": -106.290771484375,
+                                    "mean": -1.2670847354456782e-05
+                                }
+                            },
+                            "k_proj": {
+                                "weight": {
+                                    "sum": 13.366193771362305,
+                                    "mean": 6.373497853928711e-06
+                                }
+                            },
+                            "v_proj": {
+                                "weight": {
+                                    "sum": -36.18048858642578,
+                                    "mean": -1.725220135995187e-05
+                                }
+                            },
+                            "o_proj": {
+                                "weight": {
+                                    "sum": -58.84148406982422,
+                                    "mean": -7.014451512077358e-06
+                                }
+                            },
+                            "q_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "k_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "gate_proj": {
+                                "weight": {
+                                    "sum": 154.24642944335938,
+                                    "mean": 6.129202574811643e-06
+                                }
+                            },
+                            "up_proj": {
+                                "weight": {
+                                    "sum": -706.4552001953125,
+                                    "mean": -2.8072008717572317e-05
+                                }
+                            },
+                            "down_proj": {
+                                "weight": {
+                                    "sum": 56.34642791748047,
+                                    "mean": 2.2390058802557178e-06
+                                }
+                            }
+                        },
+                        "input_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "post_attention_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        }
+                    },
+                    "2": {
+                        "self_attn": {
+                            "q_proj": {
+                                "weight": {
+                                    "sum": -43.05854034423828,
+                                    "mean": -5.1329780035302974e-06
+                                }
+                            },
+                            "k_proj": {
+                                "weight": {
+                                    "sum": -19.6262149810791,
+                                    "mean": -9.358508577861357e-06
+                                }
+                            },
+                            "v_proj": {
+                                "weight": {
+                                    "sum": -20.33470344543457,
+                                    "mean": -9.696342203824315e-06
+                                }
+                            },
+                            "o_proj": {
+                                "weight": {
+                                    "sum": -10.938192367553711,
+                                    "mean": -1.3039341411058558e-06
+                                }
+                            },
+                            "q_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "k_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "gate_proj": {
+                                "weight": {
+                                    "sum": 9.583160400390625,
+                                    "mean": 3.808005999417219e-07
+                                }
+                            },
+                            "up_proj": {
+                                "weight": {
+                                    "sum": -275.24652099609375,
+                                    "mean": -1.093731407308951e-05
+                                }
+                            },
+                            "down_proj": {
+                                "weight": {
+                                    "sum": 12.314762115478516,
+                                    "mean": 4.893446998721629e-07
+                                }
+                            }
+                        },
+                        "input_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "post_attention_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        }
+                    },
+                    "3": {
+                        "self_attn": {
+                            "q_proj": {
+                                "weight": {
+                                    "sum": -83.56647491455078,
+                                    "mean": -9.961900104826782e-06
+                                }
+                            },
+                            "k_proj": {
+                                "weight": {
+                                    "sum": -29.052412033081055,
+                                    "mean": -1.3853269592800643e-05
+                                }
+                            },
+                            "v_proj": {
+                                "weight": {
+                                    "sum": 6.808450698852539,
+                                    "mean": 3.246522283006925e-06
+                                }
+                            },
+                            "o_proj": {
+                                "weight": {
+                                    "sum": 42.616844177246094,
+                                    "mean": 5.0803237172658555e-06
+                                }
+                            },
+                            "q_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "k_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "gate_proj": {
+                                "weight": {
+                                    "sum": 82.3087387084961,
+                                    "mean": 3.2706554975447943e-06
+                                }
+                            },
+                            "up_proj": {
+                                "weight": {
+                                    "sum": -538.0272216796875,
+                                    "mean": -2.1379280951805413e-05
+                                }
+                            },
+                            "down_proj": {
+                                "weight": {
+                                    "sum": 93.33641052246094,
+                                    "mean": 3.7088557292008772e-06
+                                }
+                            }
+                        },
+                        "input_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "post_attention_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        }
+                    },
+                    "4": {
+                        "self_attn": {
+                            "q_proj": {
+                                "weight": {
+                                    "sum": -50.149532318115234,
+                                    "mean": -5.978290118946461e-06
+                                }
+                            },
+                            "k_proj": {
+                                "weight": {
+                                    "sum": -14.13983154296875,
+                                    "mean": -6.742397090420127e-06
+                                }
+                            },
+                            "v_proj": {
+                                "weight": {
+                                    "sum": -7.1288251876831055,
+                                    "mean": -3.3992887438216712e-06
+                                }
+                            },
+                            "o_proj": {
+                                "weight": {
+                                    "sum": -138.08889770507812,
+                                    "mean": -1.646147939027287e-05
+                                }
+                            },
+                            "q_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "k_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "gate_proj": {
+                                "weight": {
+                                    "sum": 146.77853393554688,
+                                    "mean": 5.832454917253926e-06
+                                }
+                            },
+                            "up_proj": {
+                                "weight": {
+                                    "sum": -838.2315673828125,
+                                    "mean": -3.3308329875580966e-05
+                                }
+                            },
+                            "down_proj": {
+                                "weight": {
+                                    "sum": 57.15502166748047,
+                                    "mean": 2.271136509079952e-06
+                                }
+                            }
+                        },
+                        "input_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "post_attention_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        }
+                    },
+                    "5": {
+                        "self_attn": {
+                            "q_proj": {
+                                "weight": {
+                                    "sum": 102.9386215209961,
+                                    "mean": 1.2271239938854706e-05
+                                }
+                            },
+                            "k_proj": {
+                                "weight": {
+                                    "sum": -34.63068389892578,
+                                    "mean": -1.6513196896994486e-05
+                                }
+                            },
+                            "v_proj": {
+                                "weight": {
+                                    "sum": -8.088560104370117,
+                                    "mean": -3.856926014123019e-06
+                                }
+                            },
+                            "o_proj": {
+                                "weight": {
+                                    "sum": 0.6820487976074219,
+                                    "mean": 8.130655260174535e-08
+                                }
+                            },
+                            "q_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "k_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "gate_proj": {
+                                "weight": {
+                                    "sum": -130.35702514648438,
+                                    "mean": -5.17992293680436e-06
+                                }
+                            },
+                            "up_proj": {
+                                "weight": {
+                                    "sum": -298.5888977050781,
+                                    "mean": -1.186485678772442e-05
+                                }
+                            },
+                            "down_proj": {
+                                "weight": {
+                                    "sum": -49.70258331298828,
+                                    "mean": -1.975003215193283e-06
+                                }
+                            }
+                        },
+                        "input_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "post_attention_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        }
+                    },
+                    "6": {
+                        "self_attn": {
+                            "q_proj": {
+                                "weight": {
+                                    "sum": -9.575711250305176,
+                                    "mean": -1.1415137350923032e-06
+                                }
+                            },
+                            "k_proj": {
+                                "weight": {
+                                    "sum": 76.56636810302734,
+                                    "mean": 3.650968938018195e-05
+                                }
+                            },
+                            "v_proj": {
+                                "weight": {
+                                    "sum": -38.27789306640625,
+                                    "mean": -1.825232175178826e-05
+                                }
+                            },
+                            "o_proj": {
+                                "weight": {
+                                    "sum": -25.83346176147461,
+                                    "mean": -3.079588623222662e-06
+                                }
+                            },
+                            "q_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "k_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "gate_proj": {
+                                "weight": {
+                                    "sum": -8.296272277832031,
+                                    "mean": -3.29664260334539e-07
+                                }
+                            },
+                            "up_proj": {
+                                "weight": {
+                                    "sum": -1304.9449462890625,
+                                    "mean": -5.185385452932678e-05
+                                }
+                            },
+                            "down_proj": {
+                                "weight": {
+                                    "sum": 65.09388732910156,
+                                    "mean": 2.58659883911605e-06
+                                }
+                            }
+                        },
+                        "input_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "post_attention_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        }
+                    },
+                    "7": {
+                        "self_attn": {
+                            "q_proj": {
+                                "weight": {
+                                    "sum": 18.837182998657227,
+                                    "mean": 2.245567202407983e-06
+                                }
+                            },
+                            "k_proj": {
+                                "weight": {
+                                    "sum": 7.367973327636719,
+                                    "mean": 3.5133234632667154e-06
+                                }
+                            },
+                            "v_proj": {
+                                "weight": {
+                                    "sum": 24.996055603027344,
+                                    "mean": 1.1919048120034859e-05
+                                }
+                            },
+                            "o_proj": {
+                                "weight": {
+                                    "sum": 192.19093322753906,
+                                    "mean": 2.291094460815657e-05
+                                }
+                            },
+                            "q_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "k_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "gate_proj": {
+                                "weight": {
+                                    "sum": 56.63878631591797,
+                                    "mean": 2.2506233108288143e-06
+                                }
+                            },
+                            "up_proj": {
+                                "weight": {
+                                    "sum": -1218.32958984375,
+                                    "mean": -4.841206828132272e-05
+                                }
+                            },
+                            "down_proj": {
+                                "weight": {
+                                    "sum": -143.37283325195312,
+                                    "mean": -5.69712483411422e-06
+                                }
+                            }
+                        },
+                        "input_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "post_attention_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        }
+                    },
+                    "8": {
+                        "self_attn": {
+                            "q_proj": {
+                                "weight": {
+                                    "sum": -45.1204948425293,
+                                    "mean": -5.378782134357607e-06
+                                }
+                            },
+                            "k_proj": {
+                                "weight": {
+                                    "sum": 0.7754735946655273,
+                                    "mean": 3.697746251418721e-07
+                                }
+                            },
+                            "v_proj": {
+                                "weight": {
+                                    "sum": -18.579456329345703,
+                                    "mean": -8.859375157044269e-06
+                                }
+                            },
+                            "o_proj": {
+                                "weight": {
+                                    "sum": 60.433998107910156,
+                                    "mean": 7.204293979157228e-06
+                                }
+                            },
+                            "q_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "k_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "gate_proj": {
+                                "weight": {
+                                    "sum": 97.2996597290039,
+                                    "mean": 3.866341103275772e-06
+                                }
+                            },
+                            "up_proj": {
+                                "weight": {
+                                    "sum": 205.10321044921875,
+                                    "mean": 8.15006933407858e-06
+                                }
+                            },
+                            "down_proj": {
+                                "weight": {
+                                    "sum": 147.57794189453125,
+                                    "mean": 5.8642208387027495e-06
+                                }
+                            }
+                        },
+                        "input_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "post_attention_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        }
+                    },
+                    "9": {
+                        "self_attn": {
+                            "q_proj": {
+                                "weight": {
+                                    "sum": -34.24051284790039,
+                                    "mean": -4.081787210452603e-06
+                                }
+                            },
+                            "k_proj": {
+                                "weight": {
+                                    "sum": 21.408035278320312,
+                                    "mean": 1.0208146704826504e-05
+                                }
+                            },
+                            "v_proj": {
+                                "weight": {
+                                    "sum": 50.96242904663086,
+                                    "mean": 2.4300779841723852e-05
+                                }
+                            },
+                            "o_proj": {
+                                "weight": {
+                                    "sum": 20.240751266479492,
+                                    "mean": 2.412885578451096e-06
+                                }
+                            },
+                            "q_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "k_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "gate_proj": {
+                                "weight": {
+                                    "sum": 23.192916870117188,
+                                    "mean": 9.21603714232333e-07
+                                }
+                            },
+                            "up_proj": {
+                                "weight": {
+                                    "sum": 450.56964111328125,
+                                    "mean": 1.7904028936754912e-05
+                                }
+                            },
+                            "down_proj": {
+                                "weight": {
+                                    "sum": -125.92439270019531,
+                                    "mean": -5.0037861001328565e-06
+                                }
+                            }
+                        },
+                        "input_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "post_attention_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        }
+                    },
+                    "10": {
+                        "self_attn": {
+                            "q_proj": {
+                                "weight": {
+                                    "sum": 3.8329544067382812,
+                                    "mean": 4.5692377170780674e-07
+                                }
+                            },
+                            "k_proj": {
+                                "weight": {
+                                    "sum": -18.582504272460938,
+                                    "mean": -8.860828529577702e-06
+                                }
+                            },
+                            "v_proj": {
+                                "weight": {
+                                    "sum": 4.332508087158203,
+                                    "mean": 2.0659008441725746e-06
+                                }
+                            },
+                            "o_proj": {
+                                "weight": {
+                                    "sum": -49.27216339111328,
+                                    "mean": -5.873699592484627e-06
+                                }
+                            },
+                            "q_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "k_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "gate_proj": {
+                                "weight": {
+                                    "sum": -162.30906677246094,
+                                    "mean": -6.449582997447578e-06
+                                }
+                            },
+                            "up_proj": {
+                                "weight": {
+                                    "sum": 339.8713073730469,
+                                    "mean": 1.3505272363545373e-05
+                                }
+                            },
+                            "down_proj": {
+                                "weight": {
+                                    "sum": -97.77298736572266,
+                                    "mean": -3.885149453708436e-06
+                                }
+                            }
+                        },
+                        "input_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "post_attention_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        }
+                    },
+                    "11": {
+                        "self_attn": {
+                            "q_proj": {
+                                "weight": {
+                                    "sum": -79.50480651855469,
+                                    "mean": -9.477711500949226e-06
+                                }
+                            },
+                            "k_proj": {
+                                "weight": {
+                                    "sum": 54.89132308959961,
+                                    "mean": 2.6174222512054257e-05
+                                }
+                            },
+                            "v_proj": {
+                                "weight": {
+                                    "sum": 10.175085067749023,
+                                    "mean": 4.851858648180496e-06
+                                }
+                            },
+                            "o_proj": {
+                                "weight": {
+                                    "sum": -15.90450668334961,
+                                    "mean": -1.8959649423777591e-06
+                                }
+                            },
+                            "q_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "k_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "gate_proj": {
+                                "weight": {
+                                    "sum": -76.29254150390625,
+                                    "mean": -3.031593223568052e-06
+                                }
+                            },
+                            "up_proj": {
+                                "weight": {
+                                    "sum": 748.4734497070312,
+                                    "mean": 2.9741662729065865e-05
+                                }
+                            },
+                            "down_proj": {
+                                "weight": {
+                                    "sum": -73.84503936767578,
+                                    "mean": -2.9343382266233675e-06
+                                }
+                            }
+                        },
+                        "input_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "post_attention_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        }
+                    },
+                    "12": {
+                        "self_attn": {
+                            "q_proj": {
+                                "weight": {
+                                    "sum": 19.521608352661133,
+                                    "mean": 2.3271570626093308e-06
+                                }
+                            },
+                            "k_proj": {
+                                "weight": {
+                                    "sum": 8.670482635498047,
+                                    "mean": 4.13440830016043e-06
+                                }
+                            },
+                            "v_proj": {
+                                "weight": {
+                                    "sum": 89.98348999023438,
+                                    "mean": 4.2907471652142704e-05
+                                }
+                            },
+                            "o_proj": {
+                                "weight": {
+                                    "sum": 125.51602172851562,
+                                    "mean": 1.496267577749677e-05
+                                }
+                            },
+                            "q_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "k_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "gate_proj": {
+                                "weight": {
+                                    "sum": -178.92105102539062,
+                                    "mean": -7.109683792805299e-06
+                                }
+                            },
+                            "up_proj": {
+                                "weight": {
+                                    "sum": 385.9556884765625,
+                                    "mean": 1.533650174678769e-05
+                                }
+                            },
+                            "down_proj": {
+                                "weight": {
+                                    "sum": -52.983551025390625,
+                                    "mean": -2.105377234329353e-06
+                                }
+                            }
+                        },
+                        "input_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "post_attention_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        }
+                    },
+                    "13": {
+                        "self_attn": {
+                            "q_proj": {
+                                "weight": {
+                                    "sum": 47.69527816772461,
+                                    "mean": 5.685720225301338e-06
+                                }
+                            },
+                            "k_proj": {
+                                "weight": {
+                                    "sum": -16.402671813964844,
+                                    "mean": -7.821403414709494e-06
+                                }
+                            },
+                            "v_proj": {
+                                "weight": {
+                                    "sum": -91.74937438964844,
+                                    "mean": -4.374951095087454e-05
+                                }
+                            },
+                            "o_proj": {
+                                "weight": {
+                                    "sum": -163.18685913085938,
+                                    "mean": -1.9453389541013166e-05
+                                }
+                            },
+                            "q_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "k_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "gate_proj": {
+                                "weight": {
+                                    "sum": 14.266998291015625,
+                                    "mean": 5.669195957125339e-07
+                                }
+                            },
+                            "up_proj": {
+                                "weight": {
+                                    "sum": 509.36822509765625,
+                                    "mean": 2.0240475350874476e-05
+                                }
+                            },
+                            "down_proj": {
+                                "weight": {
+                                    "sum": -106.27023315429688,
+                                    "mean": -4.222799816488987e-06
+                                }
+                            }
+                        },
+                        "input_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "post_attention_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        }
+                    },
+                    "14": {
+                        "self_attn": {
+                            "q_proj": {
+                                "weight": {
+                                    "sum": -7.682809829711914,
+                                    "mean": -9.15862301553716e-07
+                                }
+                            },
+                            "k_proj": {
+                                "weight": {
+                                    "sum": 21.602489471435547,
+                                    "mean": 1.0300869689672254e-05
+                                }
+                            },
+                            "v_proj": {
+                                "weight": {
+                                    "sum": -13.948532104492188,
+                                    "mean": -6.651178409811109e-06
+                                }
+                            },
+                            "o_proj": {
+                                "weight": {
+                                    "sum": 66.94532012939453,
+                                    "mean": 7.980504051374737e-06
+                                }
+                            },
+                            "q_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "k_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "gate_proj": {
+                                "weight": {
+                                    "sum": -39.17496871948242,
+                                    "mean": -1.5566733964078594e-06
+                                }
+                            },
+                            "up_proj": {
+                                "weight": {
+                                    "sum": 746.3740234375,
+                                    "mean": 2.9658240237040445e-05
+                                }
+                            },
+                            "down_proj": {
+                                "weight": {
+                                    "sum": 156.3235626220703,
+                                    "mean": 6.211740583239589e-06
+                                }
+                            }
+                        },
+                        "input_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "post_attention_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        }
+                    },
+                    "15": {
+                        "self_attn": {
+                            "q_proj": {
+                                "weight": {
+                                    "sum": 17.26015281677246,
+                                    "mean": 2.057570554825361e-06
+                                }
+                            },
+                            "k_proj": {
+                                "weight": {
+                                    "sum": 27.23068618774414,
+                                    "mean": 1.2984603017685004e-05
+                                }
+                            },
+                            "v_proj": {
+                                "weight": {
+                                    "sum": 33.27370834350586,
+                                    "mean": 1.5866140529396944e-05
+                                }
+                            },
+                            "o_proj": {
+                                "weight": {
+                                    "sum": -24.877117156982422,
+                                    "mean": -2.9655834623554256e-06
+                                }
+                            },
+                            "q_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "k_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "gate_proj": {
+                                "weight": {
+                                    "sum": 170.65567016601562,
+                                    "mean": 6.781247066101059e-06
+                                }
+                            },
+                            "up_proj": {
+                                "weight": {
+                                    "sum": 787.9080810546875,
+                                    "mean": 3.130865661660209e-05
+                                }
+                            },
+                            "down_proj": {
+                                "weight": {
+                                    "sum": 143.35763549804688,
+                                    "mean": 5.696520929632243e-06
+                                }
+                            }
+                        },
+                        "input_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "post_attention_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        }
+                    },
+                    "16": {
+                        "self_attn": {
+                            "q_proj": {
+                                "weight": {
+                                    "sum": -86.68981170654297,
+                                    "mean": -1.0334230864827987e-05
+                                }
+                            },
+                            "k_proj": {
+                                "weight": {
+                                    "sum": 57.486541748046875,
+                                    "mean": 2.7411719202063978e-05
+                                }
+                            },
+                            "v_proj": {
+                                "weight": {
+                                    "sum": -32.75727844238281,
+                                    "mean": -1.561988756293431e-05
+                                }
+                            },
+                            "o_proj": {
+                                "weight": {
+                                    "sum": -82.45965576171875,
+                                    "mean": -9.829956979956478e-06
+                                }
+                            },
+                            "q_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "k_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "gate_proj": {
+                                "weight": {
+                                    "sum": 33.23697280883789,
+                                    "mean": 1.3207186384533998e-06
+                                }
+                            },
+                            "up_proj": {
+                                "weight": {
+                                    "sum": 596.0562744140625,
+                                    "mean": 2.3685148335061967e-05
+                                }
+                            },
+                            "down_proj": {
+                                "weight": {
+                                    "sum": -90.39602661132812,
+                                    "mean": -3.592015445974539e-06
+                                }
+                            }
+                        },
+                        "input_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "post_attention_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        }
+                    },
+                    "17": {
+                        "self_attn": {
+                            "q_proj": {
+                                "weight": {
+                                    "sum": 16.779800415039062,
+                                    "mean": 2.000308086280711e-06
+                                }
+                            },
+                            "k_proj": {
+                                "weight": {
+                                    "sum": -22.509552001953125,
+                                    "mean": -1.0733390809036791e-05
+                                }
+                            },
+                            "v_proj": {
+                                "weight": {
+                                    "sum": -48.91395950317383,
+                                    "mean": -2.3323993445956148e-05
+                                }
+                            },
+                            "o_proj": {
+                                "weight": {
+                                    "sum": 1.7189826965332031,
+                                    "mean": 2.0491870600380935e-07
+                                }
+                            },
+                            "q_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "k_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "gate_proj": {
+                                "weight": {
+                                    "sum": -92.86677551269531,
+                                    "mean": -3.6901942621625494e-06
+                                }
+                            },
+                            "up_proj": {
+                                "weight": {
+                                    "sum": 339.9117431640625,
+                                    "mean": 1.3506879440683406e-05
+                                }
+                            },
+                            "down_proj": {
+                                "weight": {
+                                    "sum": 380.3004150390625,
+                                    "mean": 1.511178106738953e-05
+                                }
+                            }
+                        },
+                        "input_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "post_attention_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        }
+                    },
+                    "18": {
+                        "self_attn": {
+                            "q_proj": {
+                                "weight": {
+                                    "sum": -47.891700744628906,
+                                    "mean": -5.709135621145833e-06
+                                }
+                            },
+                            "k_proj": {
+                                "weight": {
+                                    "sum": -30.874317169189453,
+                                    "mean": -1.472202166041825e-05
+                                }
+                            },
+                            "v_proj": {
+                                "weight": {
+                                    "sum": 11.633825302124023,
+                                    "mean": 5.5474401960964315e-06
+                                }
+                            },
+                            "o_proj": {
+                                "weight": {
+                                    "sum": 38.427337646484375,
+                                    "mean": 4.580895620165393e-06
+                                }
+                            },
+                            "q_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "k_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "gate_proj": {
+                                "weight": {
+                                    "sum": 105.56446838378906,
+                                    "mean": 4.194755092612468e-06
+                                }
+                            },
+                            "up_proj": {
+                                "weight": {
+                                    "sum": 59.688926696777344,
+                                    "mean": 2.371824848523829e-06
+                                }
+                            },
+                            "down_proj": {
+                                "weight": {
+                                    "sum": 116.00775146484375,
+                                    "mean": 4.609733878169209e-06
+                                }
+                            }
+                        },
+                        "input_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "post_attention_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        }
+                    },
+                    "19": {
+                        "self_attn": {
+                            "q_proj": {
+                                "weight": {
+                                    "sum": 88.98075866699219,
+                                    "mean": 1.060733302438166e-05
+                                }
+                            },
+                            "k_proj": {
+                                "weight": {
+                                    "sum": -72.93035125732422,
+                                    "mean": -3.4775901440298185e-05
+                                }
+                            },
+                            "v_proj": {
+                                "weight": {
+                                    "sum": 31.50493621826172,
+                                    "mean": 1.5022724255686626e-05
+                                }
+                            },
+                            "o_proj": {
+                                "weight": {
+                                    "sum": -12.888751983642578,
+                                    "mean": -1.5364589671662543e-06
+                                }
+                            },
+                            "q_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "k_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "gate_proj": {
+                                "weight": {
+                                    "sum": 138.86880493164062,
+                                    "mean": 5.518150828720536e-06
+                                }
+                            },
+                            "up_proj": {
+                                "weight": {
+                                    "sum": 66.1563720703125,
+                                    "mean": 2.6288180379197e-06
+                                }
+                            },
+                            "down_proj": {
+                                "weight": {
+                                    "sum": 51.46300506591797,
+                                    "mean": 2.044956090685446e-06
+                                }
+                            }
+                        },
+                        "input_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "post_attention_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        }
+                    },
+                    "20": {
+                        "self_attn": {
+                            "q_proj": {
+                                "weight": {
+                                    "sum": -4.9994893074035645,
+                                    "mean": -5.959855684523063e-07
+                                }
+                            },
+                            "k_proj": {
+                                "weight": {
+                                    "sum": 34.59141159057617,
+                                    "mean": 1.6494470401084982e-05
+                                }
+                            },
+                            "v_proj": {
+                                "weight": {
+                                    "sum": -0.16357898712158203,
+                                    "mean": -7.800053936080076e-08
+                                }
+                            },
+                            "o_proj": {
+                                "weight": {
+                                    "sum": 21.20180892944336,
+                                    "mean": 2.527452579670353e-06
+                                }
+                            },
+                            "q_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "k_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "gate_proj": {
+                                "weight": {
+                                    "sum": -16.607074737548828,
+                                    "mean": -6.599058792744472e-07
+                                }
+                            },
+                            "up_proj": {
+                                "weight": {
+                                    "sum": -229.571044921875,
+                                    "mean": -9.122333722189069e-06
+                                }
+                            },
+                            "down_proj": {
+                                "weight": {
+                                    "sum": -203.49868774414062,
+                                    "mean": -8.086311936494894e-06
+                                }
+                            }
+                        },
+                        "input_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "post_attention_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        }
+                    },
+                    "21": {
+                        "self_attn": {
+                            "q_proj": {
+                                "weight": {
+                                    "sum": -61.77705383300781,
+                                    "mean": -7.364398697973229e-06
+                                }
+                            },
+                            "k_proj": {
+                                "weight": {
+                                    "sum": -36.168819427490234,
+                                    "mean": -1.7246637071366422e-05
+                                }
+                            },
+                            "v_proj": {
+                                "weight": {
+                                    "sum": -5.943305969238281,
+                                    "mean": -2.8339891287032515e-06
+                                }
+                            },
+                            "o_proj": {
+                                "weight": {
+                                    "sum": 0.6239070892333984,
+                                    "mean": 7.437552085320931e-08
+                                }
+                            },
+                            "q_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "k_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "gate_proj": {
+                                "weight": {
+                                    "sum": -102.43582916259766,
+                                    "mean": -4.070434442837723e-06
+                                }
+                            },
+                            "up_proj": {
+                                "weight": {
+                                    "sum": 9.984939575195312,
+                                    "mean": 3.9676586993664387e-07
+                                }
+                            },
+                            "down_proj": {
+                                "weight": {
+                                    "sum": -12.879833221435547,
+                                    "mean": -5.117985892866272e-07
+                                }
+                            }
+                        },
+                        "input_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "post_attention_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        }
+                    },
+                    "22": {
+                        "self_attn": {
+                            "q_proj": {
+                                "weight": {
+                                    "sum": 105.9424057006836,
+                                    "mean": 1.2629318916879129e-05
+                                }
+                            },
+                            "k_proj": {
+                                "weight": {
+                                    "sum": -13.851978302001953,
+                                    "mean": -6.60513796901796e-06
+                                }
+                            },
+                            "v_proj": {
+                                "weight": {
+                                    "sum": -3.0894908905029297,
+                                    "mean": -1.473184056521859e-06
+                                }
+                            },
+                            "o_proj": {
+                                "weight": {
+                                    "sum": 23.663589477539062,
+                                    "mean": 2.8209196898387745e-06
+                                }
+                            },
+                            "q_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "k_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "gate_proj": {
+                                "weight": {
+                                    "sum": 51.51628875732422,
+                                    "mean": 2.047073394351173e-06
+                                }
+                            },
+                            "up_proj": {
+                                "weight": {
+                                    "sum": 293.3652038574219,
+                                    "mean": 1.1657286449917592e-05
+                                }
+                            },
+                            "down_proj": {
+                                "weight": {
+                                    "sum": -28.547393798828125,
+                                    "mean": -1.1343715868861182e-06
+                                }
+                            }
+                        },
+                        "input_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "post_attention_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        }
+                    },
+                    "23": {
+                        "self_attn": {
+                            "q_proj": {
+                                "weight": {
+                                    "sum": 39.8752555847168,
+                                    "mean": 4.753500888909912e-06
+                                }
+                            },
+                            "k_proj": {
+                                "weight": {
+                                    "sum": -4.558986663818359,
+                                    "mean": -2.173894245061092e-06
+                                }
+                            },
+                            "v_proj": {
+                                "weight": {
+                                    "sum": 57.71792984008789,
+                                    "mean": 2.752205364231486e-05
+                                }
+                            },
+                            "o_proj": {
+                                "weight": {
+                                    "sum": 14.374504089355469,
+                                    "mean": 1.7135744201368652e-06
+                                }
+                            },
+                            "q_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "k_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "gate_proj": {
+                                "weight": {
+                                    "sum": 243.83303833007812,
+                                    "mean": 9.689054422779009e-06
+                                }
+                            },
+                            "up_proj": {
+                                "weight": {
+                                    "sum": 583.3269653320312,
+                                    "mean": 2.317933103768155e-05
+                                }
+                            },
+                            "down_proj": {
+                                "weight": {
+                                    "sum": -58.10890197753906,
+                                    "mean": -2.309040382897365e-06
+                                }
+                            }
+                        },
+                        "input_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "post_attention_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        }
+                    },
+                    "24": {
+                        "self_attn": {
+                            "q_proj": {
+                                "weight": {
+                                    "sum": 38.92027282714844,
+                                    "mean": 4.639658072846942e-06
+                                }
+                            },
+                            "k_proj": {
+                                "weight": {
+                                    "sum": 8.086721420288086,
+                                    "mean": 3.85604926123051e-06
+                                }
+                            },
+                            "v_proj": {
+                                "weight": {
+                                    "sum": 15.995208740234375,
+                                    "mean": 7.627109880559146e-06
+                                }
+                            },
+                            "o_proj": {
+                                "weight": {
+                                    "sum": -43.4972038269043,
+                                    "mean": -5.185270765650785e-06
+                                }
+                            },
+                            "q_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "k_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "gate_proj": {
+                                "weight": {
+                                    "sum": -72.77677154541016,
+                                    "mean": -2.891889153033844e-06
+                                }
+                            },
+                            "up_proj": {
+                                "weight": {
+                                    "sum": 679.9249877929688,
+                                    "mean": 2.7017791580874473e-05
+                                }
+                            },
+                            "down_proj": {
+                                "weight": {
+                                    "sum": 106.89859008789062,
+                                    "mean": 4.24776862928411e-06
+                                }
+                            }
+                        },
+                        "input_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "post_attention_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        }
+                    },
+                    "25": {
+                        "self_attn": {
+                            "q_proj": {
+                                "weight": {
+                                    "sum": -83.00225830078125,
+                                    "mean": -9.894640243146569e-06
+                                }
+                            },
+                            "k_proj": {
+                                "weight": {
+                                    "sum": -8.563468933105469,
+                                    "mean": -4.0833801904227585e-06
+                                }
+                            },
+                            "v_proj": {
+                                "weight": {
+                                    "sum": 23.4686222076416,
+                                    "mean": 1.1190711120434571e-05
+                                }
+                            },
+                            "o_proj": {
+                                "weight": {
+                                    "sum": -105.25493621826172,
+                                    "mean": -1.2547366168291774e-05
+                                }
+                            },
+                            "q_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "k_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "gate_proj": {
+                                "weight": {
+                                    "sum": 36.04905700683594,
+                                    "mean": 1.4324608628157876e-06
+                                }
+                            },
+                            "up_proj": {
+                                "weight": {
+                                    "sum": 1046.5870361328125,
+                                    "mean": 4.158763476880267e-05
+                                }
+                            },
+                            "down_proj": {
+                                "weight": {
+                                    "sum": -138.29971313476562,
+                                    "mean": -5.495537152455654e-06
+                                }
+                            }
+                        },
+                        "input_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "post_attention_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        }
+                    },
+                    "26": {
+                        "self_attn": {
+                            "q_proj": {
+                                "weight": {
+                                    "sum": 66.70724487304688,
+                                    "mean": 7.952123269205913e-06
+                                }
+                            },
+                            "k_proj": {
+                                "weight": {
+                                    "sum": -28.395727157592773,
+                                    "mean": -1.3540137842937838e-05
+                                }
+                            },
+                            "v_proj": {
+                                "weight": {
+                                    "sum": 118.53980255126953,
+                                    "mean": 5.652418258250691e-05
+                                }
+                            },
+                            "o_proj": {
+                                "weight": {
+                                    "sum": 121.45741271972656,
+                                    "mean": 1.4478851880994625e-05
+                                }
+                            },
+                            "q_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "k_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "gate_proj": {
+                                "weight": {
+                                    "sum": 66.08646392822266,
+                                    "mean": 2.62604021372681e-06
+                                }
+                            },
+                            "up_proj": {
+                                "weight": {
+                                    "sum": 1405.6590576171875,
+                                    "mean": 5.585587496170774e-05
+                                }
+                            },
+                            "down_proj": {
+                                "weight": {
+                                    "sum": 104.02510070800781,
+                                    "mean": 4.133586116950028e-06
+                                }
+                            }
+                        },
+                        "input_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "post_attention_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        }
+                    },
+                    "27": {
+                        "self_attn": {
+                            "q_proj": {
+                                "weight": {
+                                    "sum": 92.80424499511719,
+                                    "mean": 1.1063128113164566e-05
+                                }
+                            },
+                            "k_proj": {
+                                "weight": {
+                                    "sum": -11.098714828491211,
+                                    "mean": -5.292279638524633e-06
+                                }
+                            },
+                            "v_proj": {
+                                "weight": {
+                                    "sum": -34.627052307128906,
+                                    "mean": -1.651146521908231e-05
+                                }
+                            },
+                            "o_proj": {
+                                "weight": {
+                                    "sum": 27.063495635986328,
+                                    "mean": 3.226220087526599e-06
+                                }
+                            },
+                            "q_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "k_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "gate_proj": {
+                                "weight": {
+                                    "sum": 146.61289978027344,
+                                    "mean": 5.825873358844547e-06
+                                }
+                            },
+                            "up_proj": {
+                                "weight": {
+                                    "sum": 1548.732421875,
+                                    "mean": 6.154109723865986e-05
+                                }
+                            },
+                            "down_proj": {
+                                "weight": {
+                                    "sum": -46.52775192260742,
+                                    "mean": -1.848846750363009e-06
+                                }
+                            }
+                        },
+                        "input_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "post_attention_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        }
+                    },
+                    "28": {
+                        "self_attn": {
+                            "q_proj": {
+                                "weight": {
+                                    "sum": 16.757522583007812,
+                                    "mean": 1.997652361751534e-06
+                                }
+                            },
+                            "k_proj": {
+                                "weight": {
+                                    "sum": 28.3944091796875,
+                                    "mean": 1.3539509382098913e-05
+                                }
+                            },
+                            "v_proj": {
+                                "weight": {
+                                    "sum": 16.119186401367188,
+                                    "mean": 7.686227036174387e-06
+                                }
+                            },
+                            "o_proj": {
+                                "weight": {
+                                    "sum": -5.9564666748046875,
+                                    "mean": -7.100661605363712e-07
+                                }
+                            },
+                            "q_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "k_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "gate_proj": {
+                                "weight": {
+                                    "sum": 89.6013412475586,
+                                    "mean": 3.5604375625553075e-06
+                                }
+                            },
+                            "up_proj": {
+                                "weight": {
+                                    "sum": 1782.514892578125,
+                                    "mean": 7.083077798597515e-05
+                                }
+                            },
+                            "down_proj": {
+                                "weight": {
+                                    "sum": -189.82659912109375,
+                                    "mean": -7.543031642853748e-06
+                                }
+                            }
+                        },
+                        "input_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "post_attention_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        }
+                    },
+                    "29": {
+                        "self_attn": {
+                            "q_proj": {
+                                "weight": {
+                                    "sum": -2.6674575805664062,
+                                    "mean": -3.1798572308616713e-07
+                                }
+                            },
+                            "k_proj": {
+                                "weight": {
+                                    "sum": 12.516819953918457,
+                                    "mean": 5.968484856566647e-06
+                                }
+                            },
+                            "v_proj": {
+                                "weight": {
+                                    "sum": 82.08341217041016,
+                                    "mean": 3.9140420994954184e-05
+                                }
+                            },
+                            "o_proj": {
+                                "weight": {
+                                    "sum": 91.87562561035156,
+                                    "mean": 1.0952428056043573e-05
+                                }
+                            },
+                            "q_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "k_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "gate_proj": {
+                                "weight": {
+                                    "sum": -54.04136657714844,
+                                    "mean": -2.147411123587517e-06
+                                }
+                            },
+                            "up_proj": {
+                                "weight": {
+                                    "sum": 1492.1339111328125,
+                                    "mean": 5.929207691224292e-05
+                                }
+                            },
+                            "down_proj": {
+                                "weight": {
+                                    "sum": -260.6986999511719,
+                                    "mean": -1.035923560266383e-05
+                                }
+                            }
+                        },
+                        "input_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "post_attention_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        }
+                    },
+                    "30": {
+                        "self_attn": {
+                            "q_proj": {
+                                "weight": {
+                                    "sum": 3.2319765090942383,
+                                    "mean": 3.8528162349393824e-07
+                                }
+                            },
+                            "k_proj": {
+                                "weight": {
+                                    "sum": 23.12393569946289,
+                                    "mean": 1.1026351785403676e-05
+                                }
+                            },
+                            "v_proj": {
+                                "weight": {
+                                    "sum": 55.07846450805664,
+                                    "mean": 2.626345849421341e-05
+                                }
+                            },
+                            "o_proj": {
+                                "weight": {
+                                    "sum": 87.89889526367188,
+                                    "mean": 1.0478364856680855e-05
+                                }
+                            },
+                            "q_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "k_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "gate_proj": {
+                                "weight": {
+                                    "sum": -125.39437866210938,
+                                    "mean": -4.982724931323901e-06
+                                }
+                            },
+                            "up_proj": {
+                                "weight": {
+                                    "sum": 1222.604736328125,
+                                    "mean": 4.858194733969867e-05
+                                }
+                            },
+                            "down_proj": {
+                                "weight": {
+                                    "sum": 65.434326171875,
+                                    "mean": 2.6001266633102205e-06
+                                }
+                            }
+                        },
+                        "input_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "post_attention_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        }
+                    },
+                    "31": {
+                        "self_attn": {
+                            "q_proj": {
+                                "weight": {
+                                    "sum": 90.48993682861328,
+                                    "mean": 1.0787241080834065e-05
+                                }
+                            },
+                            "k_proj": {
+                                "weight": {
+                                    "sum": 43.30501174926758,
+                                    "mean": 2.064943873847369e-05
+                                }
+                            },
+                            "v_proj": {
+                                "weight": {
+                                    "sum": -7.67536735534668,
+                                    "mean": -3.659900357888546e-06
+                                }
+                            },
+                            "o_proj": {
+                                "weight": {
+                                    "sum": -96.89990234375,
+                                    "mean": -1.155136851593852e-05
+                                }
+                            },
+                            "q_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "k_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "gate_proj": {
+                                "weight": {
+                                    "sum": 0.5477676391601562,
+                                    "mean": 2.1766330959849256e-08
+                                }
+                            },
+                            "up_proj": {
+                                "weight": {
+                                    "sum": 806.069091796875,
+                                    "mean": 3.203030792064965e-05
+                                }
+                            },
+                            "down_proj": {
+                                "weight": {
+                                    "sum": -105.9586181640625,
+                                    "mean": -4.210417500871699e-06
+                                }
+                            }
+                        },
+                        "input_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "post_attention_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        }
+                    },
+                    "32": {
+                        "self_attn": {
+                            "q_proj": {
+                                "weight": {
+                                    "sum": -13.483757019042969,
+                                    "mean": -1.6073890947154723e-06
+                                }
+                            },
+                            "k_proj": {
+                                "weight": {
+                                    "sum": -3.1586780548095703,
+                                    "mean": -1.5061750673339702e-06
+                                }
+                            },
+                            "v_proj": {
+                                "weight": {
+                                    "sum": -15.144375801086426,
+                                    "mean": -7.221401119750226e-06
+                                }
+                            },
+                            "o_proj": {
+                                "weight": {
+                                    "sum": -68.33295440673828,
+                                    "mean": -8.145922947733197e-06
+                                }
+                            },
+                            "q_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "k_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "gate_proj": {
+                                "weight": {
+                                    "sum": 107.37760162353516,
+                                    "mean": 4.266802534402814e-06
+                                }
+                            },
+                            "up_proj": {
+                                "weight": {
+                                    "sum": 537.642578125,
+                                    "mean": 2.136399780283682e-05
+                                }
+                            },
+                            "down_proj": {
+                                "weight": {
+                                    "sum": 42.76515579223633,
+                                    "mean": 1.699334688964882e-06
+                                }
+                            }
+                        },
+                        "input_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "post_attention_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        }
+                    },
+                    "33": {
+                        "self_attn": {
+                            "q_proj": {
+                                "weight": {
+                                    "sum": -27.56359100341797,
+                                    "mean": -3.2858361009857617e-06
+                                }
+                            },
+                            "k_proj": {
+                                "weight": {
+                                    "sum": -62.58864974975586,
+                                    "mean": -2.9844593882444315e-05
+                                }
+                            },
+                            "v_proj": {
+                                "weight": {
+                                    "sum": 45.254676818847656,
+                                    "mean": 2.1579111489700153e-05
+                                }
+                            },
+                            "o_proj": {
+                                "weight": {
+                                    "sum": -9.2164306640625,
+                                    "mean": -1.0986841516569257e-06
+                                }
+                            },
+                            "q_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "k_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "gate_proj": {
+                                "weight": {
+                                    "sum": 122.30718994140625,
+                                    "mean": 4.8600513764540665e-06
+                                }
+                            },
+                            "up_proj": {
+                                "weight": {
+                                    "sum": 367.0411376953125,
+                                    "mean": 1.458490442018956e-05
+                                }
+                            },
+                            "down_proj": {
+                                "weight": {
+                                    "sum": 46.977867126464844,
+                                    "mean": 1.8667327594812377e-06
+                                }
+                            }
+                        },
+                        "input_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "post_attention_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        }
+                    },
+                    "34": {
+                        "self_attn": {
+                            "q_proj": {
+                                "weight": {
+                                    "sum": -8.8139009475708,
+                                    "mean": -1.0506988701308728e-06
+                                }
+                            },
+                            "k_proj": {
+                                "weight": {
+                                    "sum": 58.43180465698242,
+                                    "mean": 2.7862455681315623e-05
+                                }
+                            },
+                            "v_proj": {
+                                "weight": {
+                                    "sum": 27.33560562133789,
+                                    "mean": 1.3034632502240129e-05
+                                }
+                            },
+                            "o_proj": {
+                                "weight": {
+                                    "sum": -71.88194274902344,
+                                    "mean": -8.568995326641016e-06
+                                }
+                            },
+                            "q_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "k_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "gate_proj": {
+                                "weight": {
+                                    "sum": -300.95318603515625,
+                                    "mean": -1.195880577142816e-05
+                                }
+                            },
+                            "up_proj": {
+                                "weight": {
+                                    "sum": -207.32150268554688,
+                                    "mean": -8.23821665107971e-06
+                                }
+                            },
+                            "down_proj": {
+                                "weight": {
+                                    "sum": -229.3272247314453,
+                                    "mean": -9.112645784625784e-06
+                                }
+                            }
+                        },
+                        "input_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "post_attention_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        }
+                    },
+                    "35": {
+                        "self_attn": {
+                            "q_proj": {
+                                "weight": {
+                                    "sum": 59.139278411865234,
+                                    "mean": 7.0499513640243094e-06
+                                }
+                            },
+                            "k_proj": {
+                                "weight": {
+                                    "sum": 34.656314849853516,
+                                    "mean": 1.652541868679691e-05
+                                }
+                            },
+                            "v_proj": {
+                                "weight": {
+                                    "sum": -24.294300079345703,
+                                    "mean": -1.158442501036916e-05
+                                }
+                            },
+                            "o_proj": {
+                                "weight": {
+                                    "sum": 2.0545616149902344,
+                                    "mean": 2.449228304612916e-07
+                                }
+                            },
+                            "q_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            },
+                            "k_norm": {
+                                "weight": {
+                                    "sum": 0.0,
+                                    "mean": 0.0
+                                }
+                            }
+                        },
+                        "mlp": {
+                            "gate_proj": {
+                                "weight": {
+                                    "sum": 20.4056396484375,
+                                    "mean": 8.108472684398293e-07
+                                }
+                            },
+                            "up_proj": {
+                                "weight": {
+                                    "sum": -960.7378540039062,
+                                    "mean": -3.817629476543516e-05
+                                }
+                            },
+                            "down_proj": {
+                                "weight": {
+                                    "sum": 74.96963500976562,
+                                    "mean": 2.9790257940476295e-06
+                                }
+                            }
+                        },
+                        "input_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        },
+                        "post_attention_layernorm": {
+                            "weight": {
+                                "sum": 0.0,
+                                "mean": 0.0
+                            }
+                        }
+                    }
+                },
+                "norm": {
+                    "weight": {
+                        "sum": 0.0,
+                        "mean": 0.0
+                    }
+                }
+            }
+        },
+        "lm_head": {
+            "weight": {
+                "sum": 0.0,
+                "mean": 0.0
+            }
+        }
+    }
+}
