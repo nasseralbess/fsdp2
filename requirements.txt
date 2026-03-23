@@ -7,3 +7,4 @@ deepspeed
 setuptools
 future
 consoleprinter
+transformers
