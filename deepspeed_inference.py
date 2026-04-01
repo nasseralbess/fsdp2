@@ -4,6 +4,7 @@ import time
 import torch
 import deepspeed
 from transformers.models.qwen3_vl.modeling_qwen3_vl import Qwen3VLTextDecoderLayer, Qwen3VLVisionBlock
+from transformers.models.qwen2_5_vl.modeling_qwen2_5_vl import Qwen2_5_VLDecoderLayer
 from utils import DSPipeline, Performance
 from deepspeed.runtime.utils import see_memory_usage
 from deepspeed.accelerator import get_accelerator
@@ -44,7 +45,8 @@ if local_rank == 0:
 ds_kwargs = dict(base_dir=pipe.repo_root, checkpoint=pipe.checkpoints_json)
 
 injection_policy = {
-    Qwen3VLTextDecoderLayer: ("self_attn.o_proj", "mlp.down_proj"),
+    Qwen2_5_VLDecoderLayer: {"self_attn.o_proj", "mlp.down_proj"}
+    # Qwen3VLTextDecoderLayer: ("self_attn.o_proj", "mlp.down_proj"),
     # Qwen3VLVisionBlock: ("attn.proj", "mlp.linear_fc2")
 }
 

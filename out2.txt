@@ -1,0 +1,550 @@
+[2026-03-16 10:26:48,312] [INFO] [runner.py:515:main] Using IP address of 192.168.1.10 for node n1
+[2026-03-16 10:26:48,312] [INFO] [multinode_runner.py:85:get_cmd] Running on the following workers: n1,n2
+[2026-03-16 10:26:48,312] [INFO] [runner.py:630:main] cmd = pdsh -S -f 1024 -w n1,n2 export PYTHONPATH=/home/n2/fsdp2;  cd /home/n2/fsdp2; /home/n2/fsdp2/.venv/bin/python3 -u -m deepspeed.launcher.launch --world_info=eyJuMSI6IFswXSwgIm4yIjogWzBdfQ== --node_rank=%n --master_addr=192.168.1.10 --master_port=29500 --enable_each_rank_log=None deepspeed_inference.py --model Qwen/Qwen3-VL-8B-Thinking --max_tokens 3000 --max_new_tokens 100 --dtype bfloat16
+n2: [2026-03-16 10:26:50,567] [INFO] [launch.py:162:main] WORLD INFO DICT: {'n1': [0], 'n2': [0]}
+n2: [2026-03-16 10:26:50,567] [INFO] [launch.py:168:main] nnodes=2, num_local_procs=1, node_rank=1
+n2: [2026-03-16 10:26:50,567] [INFO] [launch.py:179:main] global_rank_mapping=defaultdict(<class 'list'>, {'n1': [0], 'n2': [1]})
+n2: [2026-03-16 10:26:50,567] [INFO] [launch.py:180:main] dist_world_size=2
+n2: [2026-03-16 10:26:50,567] [INFO] [launch.py:184:main] Setting CUDA_VISIBLE_DEVICES=0
+n2: [2026-03-16 10:26:50,568] [INFO] [launch.py:272:main] process 50348 spawned with command: ['/home/n2/fsdp2/.venv/bin/python3', '-u', 'deepspeed_inference.py', '--local_rank=0', '--model', 'Qwen/Qwen3-VL-8B-Thinking', '--max_tokens', '3000', '--max_new_tokens', '100', '--dtype', 'bfloat16']
+n1: [2026-03-16 10:26:49,513] [INFO] [launch.py:162:main] WORLD INFO DICT: {'n1': [0], 'n2': [0]}
+n1: [2026-03-16 10:26:49,513] [INFO] [launch.py:168:main] nnodes=2, num_local_procs=1, node_rank=0
+n1: [2026-03-16 10:26:49,513] [INFO] [launch.py:179:main] global_rank_mapping=defaultdict(<class 'list'>, {'n1': [0], 'n2': [1]})
+n1: [2026-03-16 10:26:49,513] [INFO] [launch.py:180:main] dist_world_size=2
+n1: [2026-03-16 10:26:49,513] [INFO] [launch.py:184:main] Setting CUDA_VISIBLE_DEVICES=0
+n1: [2026-03-16 10:26:49,513] [INFO] [launch.py:272:main] process 128791 spawned with command: ['/home/n2/fsdp2/.venv/bin/python3', '-u', 'deepspeed_inference.py', '--local_rank=0', '--model', 'Qwen/Qwen3-VL-8B-Thinking', '--max_tokens', '3000', '--max_new_tokens', '100', '--dtype', 'bfloat16']
+n1: n1:128791:128791 [0] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eno1
+n1: n1:128791:128791 [0] NCCL INFO Bootstrap: Using eno1:192.168.1.10<0>
+n1: n1:128791:128791 [0] NCCL INFO cudaDriverVersion 13000
+n1: n1:128791:128791 [0] NCCL INFO NCCL version 2.27.5+cuda12.9
+n2: n2:50348:50348 [0] NCCL INFO cudaDriverVersion 13000
+n2: n2:50348:50348 [0] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eno1
+n2: n2:50348:50348 [0] NCCL INFO Bootstrap: Using eno1:192.168.1.11<0>
+n2: n2:50348:50348 [0] NCCL INFO NCCL version 2.27.5+cuda12.9
+n2: n2:50348:50348 [0] NCCL INFO Comm config Blocking set to 1
+n1: n1:128791:128791 [0] NCCL INFO Comm config Blocking set to 1
+n2: n2:50348:50412 [0] NCCL INFO NET/Plugin: Could not find: libnccl-net.so. 
+n2: n2:50348:50412 [0] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eno1
+n2: n2:50348:50412 [0] NCCL INFO NET/IB : No device found.
+n2: n2:50348:50412 [0] NCCL INFO NET/IB : Using [RO]; OOB eno1:192.168.1.11<0>
+n2: n2:50348:50412 [0] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eno1
+n2: n2:50348:50412 [0] NCCL INFO NET/Socket : Using [0]eno1:192.168.1.11<0>
+n2: n2:50348:50412 [0] NCCL INFO Initialized NET plugin Socket
+n2: n2:50348:50412 [0] NCCL INFO Assigned NET plugin Socket to comm
+n2: n2:50348:50412 [0] NCCL INFO Using network Socket
+n2: n2:50348:50412 [0] NCCL INFO ncclCommInitRankConfig comm 0x55b9536576e0 rank 1 nranks 2 cudaDev 0 nvmlDev 0 busId 1000 commId 0xbce0f3c63200f519 - Init START
+n1: n1:128791:128857 [0] NCCL INFO NET/Plugin: Could not find: libnccl-net.so. 
+n1: n1:128791:128857 [0] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eno1
+n1: n1:128791:128857 [0] NCCL INFO NET/IB : No device found.
+n1: n1:128791:128857 [0] NCCL INFO NET/IB : Using [RO]; OOB eno1:192.168.1.10<0>
+n1: n1:128791:128857 [0] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eno1
+n1: n1:128791:128857 [0] NCCL INFO NET/Socket : Using [0]eno1:192.168.1.10<0>
+n1: n1:128791:128857 [0] NCCL INFO Initialized NET plugin Socket
+n1: n1:128791:128857 [0] NCCL INFO Assigned NET plugin Socket to comm
+n1: n1:128791:128857 [0] NCCL INFO Using network Socket
+n1: n1:128791:128857 [0] NCCL INFO ncclCommInitRankConfig comm 0x57600bfab380 rank 0 nranks 2 cudaDev 0 nvmlDev 0 busId 1000 commId 0xbce0f3c63200f519 - Init START
+n2: n2:50348:50412 [0] NCCL INFO RAS client listening socket at 127.0.0.1<28028>
+n1: n1:128791:128857 [0] NCCL INFO RAS client listening socket at 127.0.0.1<28028>
+n2: n2:50348:50412 [0] NCCL INFO Bootstrap timings total 0.018743 (create 0.000016, send 0.000267, recv 0.010773, ring 0.007295, delay 0.000000)
+n1: n1:128791:128857 [0] NCCL INFO Bootstrap timings total 0.008088 (create 0.000013, send 0.000053, recv 0.000251, ring 0.000081, delay 0.000000)
+n2: n2:50348:50412 [0] NCCL INFO comm 0x55b9536576e0 rank 1 nRanks 2 nNodes 2 localRanks 1 localRank 0 MNNVL 0
+n2: n2:50348:50412 [0] NCCL INFO Trees [0] -1/-1/-1->1->0 [1] 0/-1/-1->1->-1
+n2: n2:50348:50412 [0] NCCL INFO P2P Chunksize set to 131072
+n2: n2:50348:50412 [0] NCCL INFO PROFILER/Plugin: Could not find: libnccl-profiler.so. 
+n1: n1:128791:128857 [0] NCCL INFO comm 0x57600bfab380 rank 0 nRanks 2 nNodes 2 localRanks 1 localRank 0 MNNVL 0
+n1: n1:128791:128857 [0] NCCL INFO Channel 00/02 : 0 1
+n1: n1:128791:128857 [0] NCCL INFO Channel 01/02 : 0 1
+n1: n1:128791:128857 [0] NCCL INFO Trees [0] 1/-1/-1->0->-1 [1] -1/-1/-1->0->1
+n1: n1:128791:128857 [0] NCCL INFO P2P Chunksize set to 131072
+n1: n1:128791:128857 [0] NCCL INFO PROFILER/Plugin: Could not find: libnccl-profiler.so. 
+n1: n1:128791:128857 [0] NCCL INFO Check P2P Type isAllDirectP2p 0 directMode 0
+n2: n2:50348:50415 [0] NCCL INFO [Proxy Service UDS] Device 0 CPU core 17
+n2: n2:50348:50414 [0] NCCL INFO [Proxy Service] Device 0 CPU core 29
+n2: n2:50348:50412 [0] NCCL INFO threadThresholds 8/8/64 | 16/8/64 | 512 | 512
+n2: n2:50348:50412 [0] NCCL INFO 2 coll channels, 2 collnet channels, 0 nvls channels, 2 p2p channels, 2 p2p channels per peer
+n1: n1:128791:128859 [0] NCCL INFO [Proxy Service] Device 0 CPU core 20
+n1: n1:128791:128860 [0] NCCL INFO [Proxy Service UDS] Device 0 CPU core 25
+n2: n2:50348:50412 [0] NCCL INFO TUNER/Plugin: Could not find: libnccl-tuner.so. Using internal tuner plugin.
+n2: n2:50348:50412 [0] NCCL INFO ncclCommInitRankConfig comm 0x55b9536576e0 rank 1 nranks 2 cudaDev 0 nvmlDev 0 busId 1000 commId 0xbce0f3c63200f519 - Init COMPLETE
+n2: n2:50348:50412 [0] NCCL INFO Init timings - ncclCommInitRankConfig: rank 1 nranks 2 total 0.08 (kernels 0.06, alloc 0.00, bootstrap 0.02, allgathers 0.00, topo 0.00, graphs 0.00, connections 0.00, rest 0.00)
+n1: n1:128791:128857 [0] NCCL INFO threadThresholds 8/8/64 | 16/8/64 | 512 | 512
+n1: n1:128791:128857 [0] NCCL INFO 2 coll channels, 2 collnet channels, 0 nvls channels, 2 p2p channels, 2 p2p channels per peer
+n1: n1:128791:128857 [0] NCCL INFO CC Off, workFifoBytes 1048576
+n1: n1:128791:128857 [0] NCCL INFO TUNER/Plugin: Could not find: libnccl-tuner.so. Using internal tuner plugin.
+n1: n1:128791:128857 [0] NCCL INFO ncclCommInitRankConfig comm 0x57600bfab380 rank 0 nranks 2 cudaDev 0 nvmlDev 0 busId 1000 commId 0xbce0f3c63200f519 - Init COMPLETE
+n1: n1:128791:128857 [0] NCCL INFO Init timings - ncclCommInitRankConfig: rank 0 nranks 2 total 0.07 (kernels 0.06, alloc 0.00, bootstrap 0.01, allgathers 0.00, topo 0.00, graphs 0.00, connections 0.00, rest 0.00)
+n1: before init
+n1: MA 0.0 GB         Max_MA 0.0 GB         CA 0.0 GB         Max_CA 0 GB 
+n1: CPU Virtual Memory:  used = 4.21 GB, percent = 13.5%
+n2: 
+n2: 
+n2: dtype: torch.bfloat16 
+n2: 
+n2: 
+n2: 
+n2: 
+n2: dtype2: torch.bfloat16 
+n2: 
+n2: 
+n2: initialization time: 10359.057664871216ms
+n2: [BEFORE deepspeed] input_layernorm[0] sum=44.0000, device=cpu, dtype=torch.bfloat16
+n2: n2:50348:50348 [0] NCCL INFO Comm config Blocking set to 1
+n1: 
+n1: 
+n1: dtype: torch.bfloat16 
+n1: 
+n1: 
+n1: 
+n1: 
+n1: dtype2: torch.bfloat16 
+n1: 
+n1: 
+n1: initialization time: 10747.38073348999ms
+n1: after init
+n1: MA 0.0 GB         Max_MA 0.0 GB         CA 0.0 GB         Max_CA 0 GB 
+n1: CPU Virtual Memory:  used = 4.35 GB, percent = 14.0%
+n1: [BEFORE deepspeed] input_layernorm[0] sum=44.0000, device=cpu, dtype=torch.bfloat16
+n1: n1:128791:128791 [0] NCCL INFO Comm config Blocking set to 1
+n2: n2:50348:50466 [0] NCCL INFO Assigned NET plugin Socket to comm
+n2: n2:50348:50466 [0] NCCL INFO Using network Socket
+n2: n2:50348:50466 [0] NCCL INFO ncclCommSplit comm 0x55b95b78e250 rank 1 nranks 2 cudaDev 0 nvmlDev 0 busId 1000 parent 0x55b9536576e0 splitCount 1 color 2130503744 key 1- Init START
+n1: n1:128791:128903 [0] NCCL INFO Assigned NET plugin Socket to comm
+n1: n1:128791:128903 [0] NCCL INFO Using network Socket
+n1: n1:128791:128903 [0] NCCL INFO ncclCommSplit comm 0x57601370ea30 rank 0 nranks 2 cudaDev 0 nvmlDev 0 busId 1000 parent 0x57600bfab380 splitCount 1 color 2130503744 key 0- Init START
+n2: n2:50348:50466 [0] NCCL INFO comm 0x55b95b78e250 rank 1 nRanks 2 nNodes 2 localRanks 1 localRank 0 MNNVL 0
+n2: n2:50348:50466 [0] NCCL INFO Trees [0] -1/-1/-1->1->0 [1] 0/-1/-1->1->-1
+n2: n2:50348:50466 [0] NCCL INFO P2P Chunksize set to 131072
+n1: n1:128791:128903 [0] NCCL INFO comm 0x57601370ea30 rank 0 nRanks 2 nNodes 2 localRanks 1 localRank 0 MNNVL 0
+n1: n1:128791:128903 [0] NCCL INFO Channel 00/02 : 0 1
+n1: n1:128791:128903 [0] NCCL INFO Channel 01/02 : 0 1
+n1: n1:128791:128903 [0] NCCL INFO Trees [0] 1/-1/-1->0->-1 [1] -1/-1/-1->0->1
+n1: n1:128791:128903 [0] NCCL INFO P2P Chunksize set to 131072
+n1: n1:128791:128903 [0] NCCL INFO Check P2P Type isAllDirectP2p 0 directMode 0
+n2: n2:50348:50471 [0] NCCL INFO [Proxy Service] Device 0 CPU core 23
+n1: n1:128791:128905 [0] NCCL INFO [Proxy Service UDS] Device 0 CPU core 20
+n1: n1:128791:128904 [0] NCCL INFO [Proxy Service] Device 0 CPU core 30
+n2: n2:50348:50472 [0] NCCL INFO [Proxy Service UDS] Device 0 CPU core 29
+n2: n2:50348:50466 [0] NCCL INFO threadThresholds 8/8/64 | 16/8/64 | 512 | 512
+n2: n2:50348:50466 [0] NCCL INFO 2 coll channels, 2 collnet channels, 0 nvls channels, 2 p2p channels, 2 p2p channels per peer
+n1: n1:128791:128903 [0] NCCL INFO threadThresholds 8/8/64 | 16/8/64 | 512 | 512
+n1: n1:128791:128903 [0] NCCL INFO 2 coll channels, 2 collnet channels, 0 nvls channels, 2 p2p channels, 2 p2p channels per peer
+n1: n1:128791:128903 [0] NCCL INFO CC Off, workFifoBytes 1048576
+n2: n2:50348:50466 [0] NCCL INFO ncclCommSplit comm 0x55b95b78e250 rank 1 nranks 2 cudaDev 0 nvmlDev 0 busId 1000 parent 0x55b9536576e0 splitCount 1 color 2130503744 key 1 - Init COMPLETE
+n2: n2:50348:50466 [0] NCCL INFO Init timings - ncclCommSplit: rank 1 nranks 2 total 0.53 (kernels 0.00, alloc 0.00, bootstrap 0.00, allgathers 0.00, topo 0.00, graphs 0.00, connections 0.00, rest 0.52)
+n1: n1:128791:128903 [0] NCCL INFO ncclCommSplit comm 0x57601370ea30 rank 0 nranks 2 cudaDev 0 nvmlDev 0 busId 1000 parent 0x57600bfab380 splitCount 1 color 2130503744 key 0 - Init COMPLETE
+n1: n1:128791:128903 [0] NCCL INFO Init timings - ncclCommSplit: rank 0 nranks 2 total 0.01 (kernels 0.00, alloc 0.00, bootstrap 0.00, allgathers 0.00, topo 0.00, graphs 0.00, connections 0.00, rest 0.00)
+n1: n1:128791:128935 [0] NCCL INFO [Proxy Progress] Device 0 CPU core 21
+n1: n1:128791:128934 [0] NCCL INFO Channel 00/0 : 1[0] -> 0[0] [receive] via NET/Socket/0
+n1: n1:128791:128934 [0] NCCL INFO Channel 01/0 : 1[0] -> 0[0] [receive] via NET/Socket/0
+n1: n1:128791:128934 [0] NCCL INFO Channel 00/0 : 0[0] -> 1[0] [send] via NET/Socket/0
+n1: n1:128791:128934 [0] NCCL INFO Channel 01/0 : 0[0] -> 1[0] [send] via NET/Socket/0
+n2: n2:50348:50502 [0] NCCL INFO [Proxy Progress] Device 0 CPU core 16
+n2: n2:50348:50501 [0] NCCL INFO Channel 00/0 : 0[0] -> 1[0] [receive] via NET/Socket/0
+n2: n2:50348:50501 [0] NCCL INFO Channel 01/0 : 0[0] -> 1[0] [receive] via NET/Socket/0
+n2: n2:50348:50501 [0] NCCL INFO Channel 00/0 : 1[0] -> 0[0] [send] via NET/Socket/0
+n2: n2:50348:50501 [0] NCCL INFO Channel 01/0 : 1[0] -> 0[0] [send] via NET/Socket/0
+n2: n2:50348:50501 [0] NCCL INFO Connected all rings, use ring PXN 0 GDR 0
+n1: n1:128791:128934 [0] NCCL INFO Connected all rings, use ring PXN 0 GDR 0
+n1: [AFTER deepspeed] input_layernorm[0] sum=44.0000, device=cuda:0, dtype=torch.bfloat16
+n2: [AFTER deepspeed] input_layernorm[0] sum=44.0000, device=cuda:0, dtype=torch.bfloat16
+n1: after init_inference
+n1: MA 8.91 GB         Max_MA 8.91 GB         CA 8.93 GB         Max_CA 9 GB 
+n1: CPU Virtual Memory:  used = 4.47 GB, percent = 14.3%
+n2: n2:50348:50536 [0] NCCL INFO [Proxy Progress] Device 0 CPU core 20
+n2: n2:50348:50535 [0] NCCL INFO Channel 00/0 : 0[0] -> 1[0] [receive] via NET/Socket/0
+n2: n2:50348:50535 [0] NCCL INFO Channel 01/0 : 0[0] -> 1[0] [receive] via NET/Socket/0
+n2: n2:50348:50535 [0] NCCL INFO Channel 00/0 : 1[0] -> 0[0] [send] via NET/Socket/0
+n2: n2:50348:50535 [0] NCCL INFO Channel 01/0 : 1[0] -> 0[0] [send] via NET/Socket/0
+n1: n1:128791:129032 [0] NCCL INFO [Proxy Progress] Device 0 CPU core 18
+n1: n1:128791:129031 [0] NCCL INFO Channel 00/0 : 1[0] -> 0[0] [receive] via NET/Socket/0
+n1: n1:128791:129031 [0] NCCL INFO Channel 01/0 : 1[0] -> 0[0] [receive] via NET/Socket/0
+n1: n1:128791:129031 [0] NCCL INFO Channel 00/0 : 0[0] -> 1[0] [send] via NET/Socket/0
+n1: n1:128791:129031 [0] NCCL INFO Channel 01/0 : 0[0] -> 1[0] [send] via NET/Socket/0
+n1: n1:128791:129031 [0] NCCL INFO Connected all trees
+n2: n2:50348:50535 [0] NCCL INFO Connected all trees
+n2: n2:50348:50617 [0] NCCL INFO Connected all rings, use ring PXN 0 GDR 1
+n1: n1:128791:129049 [0] NCCL INFO Connected all rings, use ring PXN 0 GDR 1
+n1: generation time is 44.58288383483887 sec
+n1: 
+n1: in=Describe this image:
+n1: out=So, let's see. The user provided an image link, but when I check, it's just the text "bbbbb" repeated. Wait, no, actually, looking at the input, it's "bbbbb" but in the context, it's probably a placeholder or maybe a mistake. But the user says "Describe this image." Hmm. Wait, the input has a lot of "bbbbb" which might be a typo or something. Wait, no, let's check again
+n1: ------------------------------------------------------------
+n2: generation time is 44.651554584503174 sec
+n2: 
+n2: in=Describe this image:
+n2: out=So, let's see. The user provided an image link, but when I check, it's just the text "bbbbb" repeated. Wait, no, actually, looking at the input, it's "bbbbb" but in the context, it's probably a placeholder or maybe a mistake. But the user says "Describe this image." Hmm. Wait, the input has a lot of "bbbbb" which might be a typo or something. Wait, no, let's check again
+n2: ------------------------------------------------------------
+n2: n2:50348:50348 [0] NCCL INFO comm 0x55b95b78e250 rank 1 nranks 2 cudaDev 0 busId 1000 - Destroy COMPLETE
+n1: n1:128791:128791 [0] NCCL INFO comm 0x57601370ea30 rank 0 nranks 2 cudaDev 0 busId 1000 - Destroy COMPLETE
+n2: n2:50348:50348 [0] NCCL INFO comm 0x55b9536576e0 rank 1 nranks 2 cudaDev 0 busId 1000 - Destroy COMPLETE
+n1: n1:128791:128791 [0] NCCL INFO comm 0x57600bfab380 rank 0 nranks 2 cudaDev 0 busId 1000 - Destroy COMPLETE
+n2: [2026-03-16 10:27:52,573] [INFO] [launch.py:367:main] Process 50348 exits successfully.
+n1: [2026-03-16 10:27:51,520] [INFO] [launch.py:367:main] Process 128791 exits successfully.
+[2026-03-16 10:28:45,719] [INFO] [runner.py:515:main] Using IP address of 192.168.1.10 for node n1
+[2026-03-16 10:28:45,719] [INFO] [multinode_runner.py:85:get_cmd] Running on the following workers: n1,n2
+[2026-03-16 10:28:45,719] [INFO] [runner.py:630:main] cmd = pdsh -S -f 1024 -w n1,n2 export PYTHONPATH=/home/n2/fsdp2;  cd /home/n2/fsdp2; /home/n2/fsdp2/.venv/bin/python3 -u -m deepspeed.launcher.launch --world_info=eyJuMSI6IFswXSwgIm4yIjogWzBdfQ== --node_rank=%n --master_addr=192.168.1.10 --master_port=29500 --enable_each_rank_log=None deepspeed_inference.py --model Qwen/Qwen3-VL-8B-Thinking --max_tokens 3000 --max_new_tokens 100 --dtype bfloat16
+n2: [2026-03-16 10:28:48,033] [INFO] [launch.py:162:main] WORLD INFO DICT: {'n1': [0], 'n2': [0]}
+n2: [2026-03-16 10:28:48,033] [INFO] [launch.py:168:main] nnodes=2, num_local_procs=1, node_rank=1
+n2: [2026-03-16 10:28:48,033] [INFO] [launch.py:179:main] global_rank_mapping=defaultdict(<class 'list'>, {'n1': [0], 'n2': [1]})
+n2: [2026-03-16 10:28:48,033] [INFO] [launch.py:180:main] dist_world_size=2
+n2: [2026-03-16 10:28:48,033] [INFO] [launch.py:184:main] Setting CUDA_VISIBLE_DEVICES=0
+n2: [2026-03-16 10:28:48,034] [INFO] [launch.py:272:main] process 50955 spawned with command: ['/home/n2/fsdp2/.venv/bin/python3', '-u', 'deepspeed_inference.py', '--local_rank=0', '--model', 'Qwen/Qwen3-VL-8B-Thinking', '--max_tokens', '3000', '--max_new_tokens', '100', '--dtype', 'bfloat16']
+n1: [2026-03-16 10:28:46,949] [INFO] [launch.py:162:main] WORLD INFO DICT: {'n1': [0], 'n2': [0]}
+n1: [2026-03-16 10:28:46,949] [INFO] [launch.py:168:main] nnodes=2, num_local_procs=1, node_rank=0
+n1: [2026-03-16 10:28:46,949] [INFO] [launch.py:179:main] global_rank_mapping=defaultdict(<class 'list'>, {'n1': [0], 'n2': [1]})
+n1: [2026-03-16 10:28:46,949] [INFO] [launch.py:180:main] dist_world_size=2
+n1: [2026-03-16 10:28:46,949] [INFO] [launch.py:184:main] Setting CUDA_VISIBLE_DEVICES=0
+n1: [2026-03-16 10:28:46,950] [INFO] [launch.py:272:main] process 129413 spawned with command: ['/home/n2/fsdp2/.venv/bin/python3', '-u', 'deepspeed_inference.py', '--local_rank=0', '--model', 'Qwen/Qwen3-VL-8B-Thinking', '--max_tokens', '3000', '--max_new_tokens', '100', '--dtype', 'bfloat16']
+n1: n1:129413:129413 [0] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eno1
+n1: n1:129413:129413 [0] NCCL INFO Bootstrap: Using eno1:192.168.1.10<0>
+n1: n1:129413:129413 [0] NCCL INFO cudaDriverVersion 13000
+n1: n1:129413:129413 [0] NCCL INFO NCCL version 2.27.5+cuda12.9
+n2: n2:50955:50955 [0] NCCL INFO cudaDriverVersion 13000
+n2: n2:50955:50955 [0] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eno1
+n2: n2:50955:50955 [0] NCCL INFO Bootstrap: Using eno1:192.168.1.11<0>
+n2: n2:50955:50955 [0] NCCL INFO NCCL version 2.27.5+cuda12.9
+n1: n1:129413:129413 [0] NCCL INFO Comm config Blocking set to 1
+n2: n2:50955:50955 [0] NCCL INFO Comm config Blocking set to 1
+n1: n1:129413:129479 [0] NCCL INFO NET/Plugin: Could not find: libnccl-net.so. 
+n1: n1:129413:129479 [0] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eno1
+n1: n1:129413:129479 [0] NCCL INFO NET/IB : No device found.
+n1: n1:129413:129479 [0] NCCL INFO NET/IB : Using [RO]; OOB eno1:192.168.1.10<0>
+n1: n1:129413:129479 [0] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eno1
+n1: n1:129413:129479 [0] NCCL INFO NET/Socket : Using [0]eno1:192.168.1.10<0>
+n1: n1:129413:129479 [0] NCCL INFO Initialized NET plugin Socket
+n1: n1:129413:129479 [0] NCCL INFO Assigned NET plugin Socket to comm
+n1: n1:129413:129479 [0] NCCL INFO Using network Socket
+n1: n1:129413:129479 [0] NCCL INFO ncclCommInitRankConfig comm 0x642b19766d30 rank 0 nranks 2 cudaDev 0 nvmlDev 0 busId 1000 commId 0x17db3f6140b3eae2 - Init START
+n2: n2:50955:51019 [0] NCCL INFO NET/Plugin: Could not find: libnccl-net.so. 
+n2: n2:50955:51019 [0] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eno1
+n2: n2:50955:51019 [0] NCCL INFO NET/IB : No device found.
+n2: n2:50955:51019 [0] NCCL INFO NET/IB : Using [RO]; OOB eno1:192.168.1.11<0>
+n2: n2:50955:51019 [0] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eno1
+n2: n2:50955:51019 [0] NCCL INFO NET/Socket : Using [0]eno1:192.168.1.11<0>
+n2: n2:50955:51019 [0] NCCL INFO Initialized NET plugin Socket
+n2: n2:50955:51019 [0] NCCL INFO Assigned NET plugin Socket to comm
+n2: n2:50955:51019 [0] NCCL INFO Using network Socket
+n2: n2:50955:51019 [0] NCCL INFO ncclCommInitRankConfig comm 0x651acd8baad0 rank 1 nranks 2 cudaDev 0 nvmlDev 0 busId 1000 commId 0x17db3f6140b3eae2 - Init START
+n2: n2:50955:51019 [0] NCCL INFO RAS client listening socket at 127.0.0.1<28028>
+n1: n1:129413:129479 [0] NCCL INFO RAS client listening socket at 127.0.0.1<28028>
+n2: n2:50955:51019 [0] NCCL INFO Bootstrap timings total 0.012709 (create 0.000013, send 0.000136, recv 0.000311, ring 0.012045, delay 0.000000)
+n1: n1:129413:129479 [0] NCCL INFO Bootstrap timings total 0.015362 (create 0.000012, send 0.000051, recv 0.002718, ring 0.000164, delay 0.000000)
+n2: n2:50955:51019 [0] NCCL INFO comm 0x651acd8baad0 rank 1 nRanks 2 nNodes 2 localRanks 1 localRank 0 MNNVL 0
+n2: n2:50955:51019 [0] NCCL INFO Trees [0] -1/-1/-1->1->0 [1] 0/-1/-1->1->-1
+n2: n2:50955:51019 [0] NCCL INFO P2P Chunksize set to 131072
+n2: n2:50955:51019 [0] NCCL INFO PROFILER/Plugin: Could not find: libnccl-profiler.so. 
+n1: n1:129413:129479 [0] NCCL INFO comm 0x642b19766d30 rank 0 nRanks 2 nNodes 2 localRanks 1 localRank 0 MNNVL 0
+n1: n1:129413:129479 [0] NCCL INFO Channel 00/02 : 0 1
+n1: n1:129413:129479 [0] NCCL INFO Channel 01/02 : 0 1
+n1: n1:129413:129479 [0] NCCL INFO Trees [0] 1/-1/-1->0->-1 [1] -1/-1/-1->0->1
+n1: n1:129413:129479 [0] NCCL INFO P2P Chunksize set to 131072
+n2: n2:50955:51021 [0] NCCL INFO [Proxy Service] Device 0 CPU core 22
+n2: n2:50955:51022 [0] NCCL INFO [Proxy Service UDS] Device 0 CPU core 28
+n1: n1:129413:129479 [0] NCCL INFO PROFILER/Plugin: Could not find: libnccl-profiler.so. 
+n1: n1:129413:129479 [0] NCCL INFO Check P2P Type isAllDirectP2p 0 directMode 0
+n2: n2:50955:51019 [0] NCCL INFO threadThresholds 8/8/64 | 16/8/64 | 512 | 512
+n2: n2:50955:51019 [0] NCCL INFO 2 coll channels, 2 collnet channels, 0 nvls channels, 2 p2p channels, 2 p2p channels per peer
+n1: n1:129413:129481 [0] NCCL INFO [Proxy Service] Device 0 CPU core 27
+n1: n1:129413:129482 [0] NCCL INFO [Proxy Service UDS] Device 0 CPU core 21
+n1: n1:129413:129479 [0] NCCL INFO threadThresholds 8/8/64 | 16/8/64 | 512 | 512
+n1: n1:129413:129479 [0] NCCL INFO 2 coll channels, 2 collnet channels, 0 nvls channels, 2 p2p channels, 2 p2p channels per peer
+n2: n2:50955:51019 [0] NCCL INFO TUNER/Plugin: Could not find: libnccl-tuner.so. Using internal tuner plugin.
+n2: n2:50955:51019 [0] NCCL INFO ncclCommInitRankConfig comm 0x651acd8baad0 rank 1 nranks 2 cudaDev 0 nvmlDev 0 busId 1000 commId 0x17db3f6140b3eae2 - Init COMPLETE
+n2: n2:50955:51019 [0] NCCL INFO Init timings - ncclCommInitRankConfig: rank 1 nranks 2 total 0.08 (kernels 0.06, alloc 0.00, bootstrap 0.01, allgathers 0.00, topo 0.00, graphs 0.00, connections 0.00, rest 0.00)
+n1: n1:129413:129479 [0] NCCL INFO CC Off, workFifoBytes 1048576
+n1: n1:129413:129479 [0] NCCL INFO TUNER/Plugin: Could not find: libnccl-tuner.so. Using internal tuner plugin.
+n1: n1:129413:129479 [0] NCCL INFO ncclCommInitRankConfig comm 0x642b19766d30 rank 0 nranks 2 cudaDev 0 nvmlDev 0 busId 1000 commId 0x17db3f6140b3eae2 - Init COMPLETE
+n1: n1:129413:129479 [0] NCCL INFO Init timings - ncclCommInitRankConfig: rank 0 nranks 2 total 0.08 (kernels 0.06, alloc 0.00, bootstrap 0.02, allgathers 0.00, topo 0.00, graphs 0.00, connections 0.00, rest 0.00)
+n1: before init
+n1: MA 0.0 GB         Max_MA 0.0 GB         CA 0.0 GB         Max_CA 0 GB 
+n1: CPU Virtual Memory:  used = 4.14 GB, percent = 13.3%
+n2: 
+n2: 
+n2: dtype: torch.bfloat16 
+n2: 
+n2: 
+n2: 
+n2: 
+n2: dtype2: torch.bfloat16 
+n2: 
+n2: 
+n2: initialization time: 10481.977701187134ms
+n2: [BEFORE deepspeed] input_layernorm[0] sum=44.0000, device=cpu, dtype=torch.bfloat16
+n2: n2:50955:50955 [0] NCCL INFO Comm config Blocking set to 1
+n1: 
+n1: 
+n1: dtype: torch.bfloat16 
+n1: 
+n1: 
+n1: 
+n1: 
+n1: dtype2: torch.bfloat16 
+n1: 
+n1: 
+n1: initialization time: 11632.553339004517ms
+n1: after init
+n1: MA 0.0 GB         Max_MA 0.0 GB         CA 0.0 GB         Max_CA 0 GB 
+n1: CPU Virtual Memory:  used = 4.32 GB, percent = 13.9%
+n1: [BEFORE deepspeed] input_layernorm[0] sum=44.0000, device=cpu, dtype=torch.bfloat16
+n1: n1:129413:129413 [0] NCCL INFO Comm config Blocking set to 1
+n2: n2:50955:51060 [0] NCCL INFO Assigned NET plugin Socket to comm
+n2: n2:50955:51060 [0] NCCL INFO Using network Socket
+n2: n2:50955:51060 [0] NCCL INFO ncclCommSplit comm 0x651ad758e690 rank 1 nranks 2 cudaDev 0 nvmlDev 0 busId 1000 parent 0x651acd8baad0 splitCount 1 color 2130503744 key 1- Init START
+n1: n1:129413:129526 [0] NCCL INFO Assigned NET plugin Socket to comm
+n1: n1:129413:129526 [0] NCCL INFO Using network Socket
+n1: n1:129413:129526 [0] NCCL INFO ncclCommSplit comm 0x642b1bde8d30 rank 0 nranks 2 cudaDev 0 nvmlDev 0 busId 1000 parent 0x642b19766d30 splitCount 1 color 2130503744 key 0- Init START
+n2: n2:50955:51060 [0] NCCL INFO comm 0x651ad758e690 rank 1 nRanks 2 nNodes 2 localRanks 1 localRank 0 MNNVL 0
+n2: n2:50955:51060 [0] NCCL INFO Trees [0] -1/-1/-1->1->0 [1] 0/-1/-1->1->-1
+n2: n2:50955:51060 [0] NCCL INFO P2P Chunksize set to 131072
+n1: n1:129413:129526 [0] NCCL INFO comm 0x642b1bde8d30 rank 0 nRanks 2 nNodes 2 localRanks 1 localRank 0 MNNVL 0
+n1: n1:129413:129526 [0] NCCL INFO Channel 00/02 : 0 1
+n1: n1:129413:129526 [0] NCCL INFO Channel 01/02 : 0 1
+n1: n1:129413:129526 [0] NCCL INFO Trees [0] 1/-1/-1->0->-1 [1] -1/-1/-1->0->1
+n1: n1:129413:129526 [0] NCCL INFO P2P Chunksize set to 131072
+n1: n1:129413:129526 [0] NCCL INFO Check P2P Type isAllDirectP2p 0 directMode 0
+n1: n1:129413:129527 [0] NCCL INFO [Proxy Service] Device 0 CPU core 20
+n1: n1:129413:129528 [0] NCCL INFO [Proxy Service UDS] Device 0 CPU core 18
+n2: n2:50955:51083 [0] NCCL INFO [Proxy Service UDS] Device 0 CPU core 24
+n2: n2:50955:51082 [0] NCCL INFO [Proxy Service] Device 0 CPU core 28
+n2: n2:50955:51060 [0] NCCL INFO threadThresholds 8/8/64 | 16/8/64 | 512 | 512
+n2: n2:50955:51060 [0] NCCL INFO 2 coll channels, 2 collnet channels, 0 nvls channels, 2 p2p channels, 2 p2p channels per peer
+n1: n1:129413:129526 [0] NCCL INFO threadThresholds 8/8/64 | 16/8/64 | 512 | 512
+n1: n1:129413:129526 [0] NCCL INFO 2 coll channels, 2 collnet channels, 0 nvls channels, 2 p2p channels, 2 p2p channels per peer
+n1: n1:129413:129526 [0] NCCL INFO CC Off, workFifoBytes 1048576
+n1: n1:129413:129526 [0] NCCL INFO ncclCommSplit comm 0x642b1bde8d30 rank 0 nranks 2 cudaDev 0 nvmlDev 0 busId 1000 parent 0x642b19766d30 splitCount 1 color 2130503744 key 0 - Init COMPLETE
+n1: n1:129413:129526 [0] NCCL INFO Init timings - ncclCommSplit: rank 0 nranks 2 total 0.00 (kernels 0.00, alloc 0.00, bootstrap 0.00, allgathers 0.00, topo 0.00, graphs 0.00, connections 0.00, rest 0.00)
+n2: n2:50955:51060 [0] NCCL INFO ncclCommSplit comm 0x651ad758e690 rank 1 nranks 2 cudaDev 0 nvmlDev 0 busId 1000 parent 0x651acd8baad0 splitCount 1 color 2130503744 key 1 - Init COMPLETE
+n2: n2:50955:51060 [0] NCCL INFO Init timings - ncclCommSplit: rank 1 nranks 2 total 1.29 (kernels 0.00, alloc 0.00, bootstrap 0.00, allgathers 0.00, topo 0.00, graphs 0.00, connections 0.00, rest 1.29)
+n2: n2:50955:51113 [0] NCCL INFO [Proxy Progress] Device 0 CPU core 16
+n2: n2:50955:51112 [0] NCCL INFO Channel 00/0 : 0[0] -> 1[0] [receive] via NET/Socket/0
+n2: n2:50955:51112 [0] NCCL INFO Channel 01/0 : 0[0] -> 1[0] [receive] via NET/Socket/0
+n2: n2:50955:51112 [0] NCCL INFO Channel 00/0 : 1[0] -> 0[0] [send] via NET/Socket/0
+n2: n2:50955:51112 [0] NCCL INFO Channel 01/0 : 1[0] -> 0[0] [send] via NET/Socket/0
+n1: n1:129413:129558 [0] NCCL INFO [Proxy Progress] Device 0 CPU core 26
+n1: n1:129413:129557 [0] NCCL INFO Channel 00/0 : 1[0] -> 0[0] [receive] via NET/Socket/0
+n1: n1:129413:129557 [0] NCCL INFO Channel 01/0 : 1[0] -> 0[0] [receive] via NET/Socket/0
+n1: n1:129413:129557 [0] NCCL INFO Channel 00/0 : 0[0] -> 1[0] [send] via NET/Socket/0
+n1: n1:129413:129557 [0] NCCL INFO Channel 01/0 : 0[0] -> 1[0] [send] via NET/Socket/0
+n2: n2:50955:51112 [0] NCCL INFO Connected all rings, use ring PXN 0 GDR 0
+n1: n1:129413:129557 [0] NCCL INFO Connected all rings, use ring PXN 0 GDR 0
+n1: [AFTER deepspeed] input_layernorm[0] sum=44.0000, device=cuda:0, dtype=torch.bfloat16
+n2: [AFTER deepspeed] input_layernorm[0] sum=44.0000, device=cuda:0, dtype=torch.bfloat16
+n1: after init_inference
+n1: MA 8.91 GB         Max_MA 8.91 GB         CA 8.93 GB         Max_CA 9 GB 
+n1: CPU Virtual Memory:  used = 4.57 GB, percent = 14.7%
+n2: n2:50955:51147 [0] NCCL INFO [Proxy Progress] Device 0 CPU core 24
+n2: n2:50955:51146 [0] NCCL INFO Channel 00/0 : 0[0] -> 1[0] [receive] via NET/Socket/0
+n2: n2:50955:51146 [0] NCCL INFO Channel 01/0 : 0[0] -> 1[0] [receive] via NET/Socket/0
+n2: n2:50955:51146 [0] NCCL INFO Channel 00/0 : 1[0] -> 0[0] [send] via NET/Socket/0
+n2: n2:50955:51146 [0] NCCL INFO Channel 01/0 : 1[0] -> 0[0] [send] via NET/Socket/0
+n1: n1:129413:129649 [0] NCCL INFO [Proxy Progress] Device 0 CPU core 27
+n1: n1:129413:129648 [0] NCCL INFO Channel 00/0 : 1[0] -> 0[0] [receive] via NET/Socket/0
+n1: n1:129413:129648 [0] NCCL INFO Channel 01/0 : 1[0] -> 0[0] [receive] via NET/Socket/0
+n1: n1:129413:129648 [0] NCCL INFO Channel 00/0 : 0[0] -> 1[0] [send] via NET/Socket/0
+n1: n1:129413:129648 [0] NCCL INFO Channel 01/0 : 0[0] -> 1[0] [send] via NET/Socket/0
+n1: n1:129413:129648 [0] NCCL INFO Connected all trees
+n2: n2:50955:51146 [0] NCCL INFO Connected all trees
+n1: n1:129413:129666 [0] NCCL INFO Connected all rings, use ring PXN 0 GDR 1
+n2: n2:50955:51230 [0] NCCL INFO Connected all rings, use ring PXN 0 GDR 1
+n2: generation time is 44.30762505531311 sec
+n2: 
+n2: in=Describe this image:
+n2: out=Got it, let's see. The user provided a string of "b" followed by "b" and "b" again? Wait, no, wait. Let me check. Oh, wait, the input is "b" repeated 14 times, then "b" and "b" but wait, no, actually, it's "b" followed by "b" multiple times? Wait, no, the user pasted a string of "b" characters. Let me count
+n2: ------------------------------------------------------------
+n1: generation time is 44.24436330795288 sec
+n1: 
+n1: in=Describe this image:
+n1: out=Got it, let's see. The user provided a string of "b" followed by "b" and "b" again? Wait, no, wait. Let me check. Oh, wait, the input is "b" repeated 14 times, then "b" and "b" but wait, no, actually, it's "b" followed by "b" multiple times? Wait, no, the user pasted a string of "b" characters. Let me count
+n1: ------------------------------------------------------------
+n2: n2:50955:50955 [0] NCCL INFO comm 0x651ad758e690 rank 1 nranks 2 cudaDev 0 busId 1000 - Destroy COMPLETE
+n1: n1:129413:129413 [0] NCCL INFO comm 0x642b1bde8d30 rank 0 nranks 2 cudaDev 0 busId 1000 - Destroy COMPLETE
+n2: n2:50955:50955 [0] NCCL INFO comm 0x651acd8baad0 rank 1 nranks 2 cudaDev 0 busId 1000 - Destroy COMPLETE
+n1: n1:129413:129413 [0] NCCL INFO comm 0x642b19766d30 rank 0 nranks 2 cudaDev 0 busId 1000 - Destroy COMPLETE
+n2: [2026-03-16 10:29:50,040] [INFO] [launch.py:367:main] Process 50955 exits successfully.
+n1: [2026-03-16 10:29:48,957] [INFO] [launch.py:367:main] Process 129413 exits successfully.
+[2026-03-16 10:29:57,712] [INFO] [runner.py:515:main] Using IP address of 192.168.1.10 for node n1
+[2026-03-16 10:29:57,712] [INFO] [multinode_runner.py:85:get_cmd] Running on the following workers: n1,n2
+[2026-03-16 10:29:57,712] [INFO] [runner.py:630:main] cmd = pdsh -S -f 1024 -w n1,n2 export PYTHONPATH=/home/n2/fsdp2;  cd /home/n2/fsdp2; /home/n2/fsdp2/.venv/bin/python3 -u -m deepspeed.launcher.launch --world_info=eyJuMSI6IFswXSwgIm4yIjogWzBdfQ== --node_rank=%n --master_addr=192.168.1.10 --master_port=29500 --enable_each_rank_log=None deepspeed_inference.py --model Qwen/Qwen3-VL-8B-Thinking --max_tokens 3000 --max_new_tokens 100 --dtype bfloat16
+n2: [2026-03-16 10:30:00,008] [INFO] [launch.py:162:main] WORLD INFO DICT: {'n1': [0], 'n2': [0]}
+n2: [2026-03-16 10:30:00,008] [INFO] [launch.py:168:main] nnodes=2, num_local_procs=1, node_rank=1
+n2: [2026-03-16 10:30:00,008] [INFO] [launch.py:179:main] global_rank_mapping=defaultdict(<class 'list'>, {'n1': [0], 'n2': [1]})
+n2: [2026-03-16 10:30:00,008] [INFO] [launch.py:180:main] dist_world_size=2
+n2: [2026-03-16 10:30:00,008] [INFO] [launch.py:184:main] Setting CUDA_VISIBLE_DEVICES=0
+n2: [2026-03-16 10:30:00,008] [INFO] [launch.py:272:main] process 51451 spawned with command: ['/home/n2/fsdp2/.venv/bin/python3', '-u', 'deepspeed_inference.py', '--local_rank=0', '--model', 'Qwen/Qwen3-VL-8B-Thinking', '--max_tokens', '3000', '--max_new_tokens', '100', '--dtype', 'bfloat16']
+n1: [2026-03-16 10:29:58,945] [INFO] [launch.py:162:main] WORLD INFO DICT: {'n1': [0], 'n2': [0]}
+n1: [2026-03-16 10:29:58,945] [INFO] [launch.py:168:main] nnodes=2, num_local_procs=1, node_rank=0
+n1: [2026-03-16 10:29:58,945] [INFO] [launch.py:179:main] global_rank_mapping=defaultdict(<class 'list'>, {'n1': [0], 'n2': [1]})
+n1: [2026-03-16 10:29:58,945] [INFO] [launch.py:180:main] dist_world_size=2
+n1: [2026-03-16 10:29:58,945] [INFO] [launch.py:184:main] Setting CUDA_VISIBLE_DEVICES=0
+n1: [2026-03-16 10:29:58,946] [INFO] [launch.py:272:main] process 129926 spawned with command: ['/home/n2/fsdp2/.venv/bin/python3', '-u', 'deepspeed_inference.py', '--local_rank=0', '--model', 'Qwen/Qwen3-VL-8B-Thinking', '--max_tokens', '3000', '--max_new_tokens', '100', '--dtype', 'bfloat16']
+n1: n1:129926:129926 [0] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eno1
+n1: n1:129926:129926 [0] NCCL INFO Bootstrap: Using eno1:192.168.1.10<0>
+n1: n1:129926:129926 [0] NCCL INFO cudaDriverVersion 13000
+n1: n1:129926:129926 [0] NCCL INFO NCCL version 2.27.5+cuda12.9
+n2: n2:51451:51451 [0] NCCL INFO cudaDriverVersion 13000
+n2: n2:51451:51451 [0] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eno1
+n2: n2:51451:51451 [0] NCCL INFO Bootstrap: Using eno1:192.168.1.11<0>
+n2: n2:51451:51451 [0] NCCL INFO NCCL version 2.27.5+cuda12.9
+n1: n1:129926:129926 [0] NCCL INFO Comm config Blocking set to 1
+n2: n2:51451:51451 [0] NCCL INFO Comm config Blocking set to 1
+n1: n1:129926:129992 [0] NCCL INFO NET/Plugin: Could not find: libnccl-net.so. 
+n1: n1:129926:129992 [0] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eno1
+n1: n1:129926:129992 [0] NCCL INFO NET/IB : No device found.
+n1: n1:129926:129992 [0] NCCL INFO NET/IB : Using [RO]; OOB eno1:192.168.1.10<0>
+n1: n1:129926:129992 [0] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eno1
+n1: n1:129926:129992 [0] NCCL INFO NET/Socket : Using [0]eno1:192.168.1.10<0>
+n1: n1:129926:129992 [0] NCCL INFO Initialized NET plugin Socket
+n1: n1:129926:129992 [0] NCCL INFO Assigned NET plugin Socket to comm
+n1: n1:129926:129992 [0] NCCL INFO Using network Socket
+n1: n1:129926:129992 [0] NCCL INFO ncclCommInitRankConfig comm 0x62d8fe8803e0 rank 0 nranks 2 cudaDev 0 nvmlDev 0 busId 1000 commId 0x1c421674467c6081 - Init START
+n2: n2:51451:51528 [0] NCCL INFO NET/Plugin: Could not find: libnccl-net.so. 
+n2: n2:51451:51528 [0] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eno1
+n2: n2:51451:51528 [0] NCCL INFO NET/IB : No device found.
+n2: n2:51451:51528 [0] NCCL INFO NET/IB : Using [RO]; OOB eno1:192.168.1.11<0>
+n2: n2:51451:51528 [0] NCCL INFO NCCL_SOCKET_IFNAME set by environment to eno1
+n2: n2:51451:51528 [0] NCCL INFO NET/Socket : Using [0]eno1:192.168.1.11<0>
+n2: n2:51451:51528 [0] NCCL INFO Initialized NET plugin Socket
+n2: n2:51451:51528 [0] NCCL INFO Assigned NET plugin Socket to comm
+n2: n2:51451:51528 [0] NCCL INFO Using network Socket
+n2: n2:51451:51528 [0] NCCL INFO ncclCommInitRankConfig comm 0x5a03d0aa1a90 rank 1 nranks 2 cudaDev 0 nvmlDev 0 busId 1000 commId 0x1c421674467c6081 - Init START
+n2: n2:51451:51528 [0] NCCL INFO RAS client listening socket at 127.0.0.1<28028>
+n1: n1:129926:129992 [0] NCCL INFO RAS client listening socket at 127.0.0.1<28028>
+n2: n2:51451:51528 [0] NCCL INFO Bootstrap timings total 0.016128 (create 0.000012, send 0.000154, recv 0.000285, ring 0.015456, delay 0.000000)
+n1: n1:129926:129992 [0] NCCL INFO Bootstrap timings total 0.017850 (create 0.000013, send 0.000052, recv 0.001891, ring 0.000092, delay 0.000000)
+n2: n2:51451:51528 [0] NCCL INFO comm 0x5a03d0aa1a90 rank 1 nRanks 2 nNodes 2 localRanks 1 localRank 0 MNNVL 0
+n2: n2:51451:51528 [0] NCCL INFO Trees [0] -1/-1/-1->1->0 [1] 0/-1/-1->1->-1
+n2: n2:51451:51528 [0] NCCL INFO P2P Chunksize set to 131072
+n2: n2:51451:51528 [0] NCCL INFO PROFILER/Plugin: Could not find: libnccl-profiler.so. 
+n1: n1:129926:129992 [0] NCCL INFO comm 0x62d8fe8803e0 rank 0 nRanks 2 nNodes 2 localRanks 1 localRank 0 MNNVL 0
+n1: n1:129926:129992 [0] NCCL INFO Channel 00/02 : 0 1
+n1: n1:129926:129992 [0] NCCL INFO Channel 01/02 : 0 1
+n1: n1:129926:129992 [0] NCCL INFO Trees [0] 1/-1/-1->0->-1 [1] -1/-1/-1->0->1
+n1: n1:129926:129992 [0] NCCL INFO P2P Chunksize set to 131072
+n1: n1:129926:129992 [0] NCCL INFO PROFILER/Plugin: Could not find: libnccl-profiler.so. 
+n1: n1:129926:129992 [0] NCCL INFO Check P2P Type isAllDirectP2p 0 directMode 0
+n1: n1:129926:129994 [0] NCCL INFO [Proxy Service] Device 0 CPU core 23
+n1: n1:129926:129995 [0] NCCL INFO [Proxy Service UDS] Device 0 CPU core 28
+n2: n2:51451:51531 [0] NCCL INFO [Proxy Service UDS] Device 0 CPU core 29
+n2: n2:51451:51530 [0] NCCL INFO [Proxy Service] Device 0 CPU core 27
+n2: n2:51451:51528 [0] NCCL INFO threadThresholds 8/8/64 | 16/8/64 | 512 | 512
+n2: n2:51451:51528 [0] NCCL INFO 2 coll channels, 2 collnet channels, 0 nvls channels, 2 p2p channels, 2 p2p channels per peer
+n1: n1:129926:129992 [0] NCCL INFO threadThresholds 8/8/64 | 16/8/64 | 512 | 512
+n1: n1:129926:129992 [0] NCCL INFO 2 coll channels, 2 collnet channels, 0 nvls channels, 2 p2p channels, 2 p2p channels per peer
+n2: n2:51451:51528 [0] NCCL INFO TUNER/Plugin: Could not find: libnccl-tuner.so. Using internal tuner plugin.
+n2: n2:51451:51528 [0] NCCL INFO ncclCommInitRankConfig comm 0x5a03d0aa1a90 rank 1 nranks 2 cudaDev 0 nvmlDev 0 busId 1000 commId 0x1c421674467c6081 - Init COMPLETE
+n2: n2:51451:51528 [0] NCCL INFO Init timings - ncclCommInitRankConfig: rank 1 nranks 2 total 0.08 (kernels 0.06, alloc 0.00, bootstrap 0.02, allgathers 0.00, topo 0.00, graphs 0.00, connections 0.00, rest 0.00)
+n1: n1:129926:129992 [0] NCCL INFO CC Off, workFifoBytes 1048576
+n1: n1:129926:129992 [0] NCCL INFO TUNER/Plugin: Could not find: libnccl-tuner.so. Using internal tuner plugin.
+n1: n1:129926:129992 [0] NCCL INFO ncclCommInitRankConfig comm 0x62d8fe8803e0 rank 0 nranks 2 cudaDev 0 nvmlDev 0 busId 1000 commId 0x1c421674467c6081 - Init COMPLETE
+n1: n1:129926:129992 [0] NCCL INFO Init timings - ncclCommInitRankConfig: rank 0 nranks 2 total 0.08 (kernels 0.06, alloc 0.00, bootstrap 0.02, allgathers 0.00, topo 0.00, graphs 0.00, connections 0.00, rest 0.00)
+n1: before init
+n1: MA 0.0 GB         Max_MA 0.0 GB         CA 0.0 GB         Max_CA 0 GB 
+n1: CPU Virtual Memory:  used = 4.22 GB, percent = 13.6%
+n2: 
+n2: 
+n2: dtype: torch.bfloat16 
+n2: 
+n2: 
+n2: 
+n2: 
+n2: dtype2: torch.bfloat16 
+n2: 
+n2: 
+n2: initialization time: 10395.410537719727ms
+n2: [BEFORE deepspeed] input_layernorm[0] sum=44.0000, device=cpu, dtype=torch.bfloat16
+n2: n2:51451:51451 [0] NCCL INFO Comm config Blocking set to 1
+n1: 
+n1: 
+n1: dtype: torch.bfloat16 
+n1: 
+n1: 
+n1: 
+n1: 
+n1: dtype2: torch.bfloat16 
+n1: 
+n1: 
+n1: initialization time: 10853.687524795532ms
+n1: after init
+n1: MA 0.0 GB         Max_MA 0.0 GB         CA 0.0 GB         Max_CA 0 GB 
+n1: CPU Virtual Memory:  used = 4.37 GB, percent = 14.0%
+n1: [BEFORE deepspeed] input_layernorm[0] sum=44.0000, device=cpu, dtype=torch.bfloat16
+n1: n1:129926:129926 [0] NCCL INFO Comm config Blocking set to 1
+n1: n1:129926:130047 [0] NCCL INFO Assigned NET plugin Socket to comm
+n1: n1:129926:130047 [0] NCCL INFO Using network Socket
+n2: n2:51451:51574 [0] NCCL INFO Assigned NET plugin Socket to comm
+n2: n2:51451:51574 [0] NCCL INFO Using network Socket
+n2: n2:51451:51574 [0] NCCL INFO ncclCommSplit comm 0x5a03da355560 rank 1 nranks 2 cudaDev 0 nvmlDev 0 busId 1000 parent 0x5a03d0aa1a90 splitCount 1 color 2130503744 key 1- Init START
+n1: n1:129926:130047 [0] NCCL INFO ncclCommSplit comm 0x62d900f01fb0 rank 0 nranks 2 cudaDev 0 nvmlDev 0 busId 1000 parent 0x62d8fe8803e0 splitCount 1 color 2130503744 key 0- Init START
+n1: n1:129926:130047 [0] NCCL INFO comm 0x62d900f01fb0 rank 0 nRanks 2 nNodes 2 localRanks 1 localRank 0 MNNVL 0
+n1: n1:129926:130047 [0] NCCL INFO Channel 00/02 : 0 1
+n1: n1:129926:130047 [0] NCCL INFO Channel 01/02 : 0 1
+n1: n1:129926:130047 [0] NCCL INFO Trees [0] 1/-1/-1->0->-1 [1] -1/-1/-1->0->1
+n1: n1:129926:130047 [0] NCCL INFO P2P Chunksize set to 131072
+n1: n1:129926:130047 [0] NCCL INFO Check P2P Type isAllDirectP2p 0 directMode 0
+n2: n2:51451:51574 [0] NCCL INFO comm 0x5a03da355560 rank 1 nRanks 2 nNodes 2 localRanks 1 localRank 0 MNNVL 0
+n2: n2:51451:51574 [0] NCCL INFO Trees [0] -1/-1/-1->1->0 [1] 0/-1/-1->1->-1
+n2: n2:51451:51574 [0] NCCL INFO P2P Chunksize set to 131072
+n1: n1:129926:130048 [0] NCCL INFO [Proxy Service] Device 0 CPU core 28
+n1: n1:129926:130049 [0] NCCL INFO [Proxy Service UDS] Device 0 CPU core 24
+n2: n2:51451:51575 [0] NCCL INFO [Proxy Service] Device 0 CPU core 24
+n2: n2:51451:51576 [0] NCCL INFO [Proxy Service UDS] Device 0 CPU core 29
+n1: n1:129926:130047 [0] NCCL INFO threadThresholds 8/8/64 | 16/8/64 | 512 | 512
+n1: n1:129926:130047 [0] NCCL INFO 2 coll channels, 2 collnet channels, 0 nvls channels, 2 p2p channels, 2 p2p channels per peer
+n1: n1:129926:130047 [0] NCCL INFO CC Off, workFifoBytes 1048576
+n2: n2:51451:51574 [0] NCCL INFO threadThresholds 8/8/64 | 16/8/64 | 512 | 512
+n2: n2:51451:51574 [0] NCCL INFO 2 coll channels, 2 collnet channels, 0 nvls channels, 2 p2p channels, 2 p2p channels per peer
+n1: n1:129926:130047 [0] NCCL INFO ncclCommSplit comm 0x62d900f01fb0 rank 0 nranks 2 cudaDev 0 nvmlDev 0 busId 1000 parent 0x62d8fe8803e0 splitCount 1 color 2130503744 key 0 - Init COMPLETE
+n1: n1:129926:130047 [0] NCCL INFO Init timings - ncclCommSplit: rank 0 nranks 2 total 0.00 (kernels 0.00, alloc 0.00, bootstrap 0.00, allgathers 0.00, topo 0.00, graphs 0.00, connections 0.00, rest 0.00)
+n2: n2:51451:51574 [0] NCCL INFO ncclCommSplit comm 0x5a03da355560 rank 1 nranks 2 cudaDev 0 nvmlDev 0 busId 1000 parent 0x5a03d0aa1a90 splitCount 1 color 2130503744 key 1 - Init COMPLETE
+n2: n2:51451:51574 [0] NCCL INFO Init timings - ncclCommSplit: rank 1 nranks 2 total 0.61 (kernels 0.00, alloc 0.00, bootstrap 0.00, allgathers 0.00, topo 0.00, graphs 0.00, connections 0.00, rest 0.60)
+n1: n1:129926:130079 [0] NCCL INFO [Proxy Progress] Device 0 CPU core 20
+n1: n1:129926:130078 [0] NCCL INFO Channel 00/0 : 1[0] -> 0[0] [receive] via NET/Socket/0
+n1: n1:129926:130078 [0] NCCL INFO Channel 01/0 : 1[0] -> 0[0] [receive] via NET/Socket/0
+n1: n1:129926:130078 [0] NCCL INFO Channel 00/0 : 0[0] -> 1[0] [send] via NET/Socket/0
+n1: n1:129926:130078 [0] NCCL INFO Channel 01/0 : 0[0] -> 1[0] [send] via NET/Socket/0
+n2: n2:51451:51606 [0] NCCL INFO [Proxy Progress] Device 0 CPU core 17
+n2: n2:51451:51605 [0] NCCL INFO Channel 00/0 : 0[0] -> 1[0] [receive] via NET/Socket/0
+n2: n2:51451:51605 [0] NCCL INFO Channel 01/0 : 0[0] -> 1[0] [receive] via NET/Socket/0
+n2: n2:51451:51605 [0] NCCL INFO Channel 00/0 : 1[0] -> 0[0] [send] via NET/Socket/0
+n2: n2:51451:51605 [0] NCCL INFO Channel 01/0 : 1[0] -> 0[0] [send] via NET/Socket/0
+n2: n2:51451:51605 [0] NCCL INFO Connected all rings, use ring PXN 0 GDR 0
+n1: n1:129926:130078 [0] NCCL INFO Connected all rings, use ring PXN 0 GDR 0
+n1: [AFTER deepspeed] input_layernorm[0] sum=44.0000, device=cuda:0, dtype=torch.bfloat16
+n2: [AFTER deepspeed] input_layernorm[0] sum=44.0000, device=cuda:0, dtype=torch.bfloat16
+n1: after init_inference
+n1: MA 8.91 GB         Max_MA 8.91 GB         CA 8.93 GB         Max_CA 9 GB 
+n1: CPU Virtual Memory:  used = 4.64 GB, percent = 14.9%
+n2: n2:51451:51640 [0] NCCL INFO [Proxy Progress] Device 0 CPU core 24
+n2: n2:51451:51639 [0] NCCL INFO Channel 00/0 : 0[0] -> 1[0] [receive] via NET/Socket/0
+n2: n2:51451:51639 [0] NCCL INFO Channel 01/0 : 0[0] -> 1[0] [receive] via NET/Socket/0
+n2: n2:51451:51639 [0] NCCL INFO Channel 00/0 : 1[0] -> 0[0] [send] via NET/Socket/0
+n2: n2:51451:51639 [0] NCCL INFO Channel 01/0 : 1[0] -> 0[0] [send] via NET/Socket/0
+n1: n1:129926:130169 [0] NCCL INFO [Proxy Progress] Device 0 CPU core 22
+n1: n1:129926:130168 [0] NCCL INFO Channel 00/0 : 1[0] -> 0[0] [receive] via NET/Socket/0
+n1: n1:129926:130168 [0] NCCL INFO Channel 01/0 : 1[0] -> 0[0] [receive] via NET/Socket/0
+n1: n1:129926:130168 [0] NCCL INFO Channel 00/0 : 0[0] -> 1[0] [send] via NET/Socket/0
+n1: n1:129926:130168 [0] NCCL INFO Channel 01/0 : 0[0] -> 1[0] [send] via NET/Socket/0
+n2: n2:51451:51639 [0] NCCL INFO Connected all trees
+n1: n1:129926:130168 [0] NCCL INFO Connected all trees
+n2: n2:51451:51723 [0] NCCL INFO Connected all rings, use ring PXN 0 GDR 1
+n1: n1:129926:130186 [0] NCCL INFO Connected all rings, use ring PXN 0 GDR 1
+n2: generation time is 44.68658757209778 sec
+n2: 
+n2: in=Describe this image:
+n2: out=So, let's see. The user provided an image of the word "Buffet" but with each letter replaced by a corresponding letter from a specific type of image. Wait, no, actually, looking at the problem, the user pasted a string of characters. Let me check.
+n2: 
+n2: The user wrote: "BBB...BBB...BBB...BBB...BBB...BBB...BBB...BBB...BBB...BBB...BBB...BBB...BB
+n2: ------------------------------------------------------------
+n1: generation time is 44.61916208267212 sec
+n1: 
+n1: in=Describe this image:
+n1: out=So, let's see. The user provided an image of the word "Buffet" but with each letter replaced by a corresponding letter from a specific type of image. Wait, no, actually, looking at the problem, the user pasted a string of characters. Let me check.
+n1: 
+n1: The user wrote: "BBB...BBB...BBB...BBB...BBB...BBB...BBB...BBB...BBB...BBB...BBB...BBB...BB
+n1: ------------------------------------------------------------
+n1: n1:129926:129926 [0] NCCL INFO comm 0x62d900f01fb0 rank 0 nranks 2 cudaDev 0 busId 1000 - Destroy COMPLETE
+n2: n2:51451:51451 [0] NCCL INFO comm 0x5a03da355560 rank 1 nranks 2 cudaDev 0 busId 1000 - Destroy COMPLETE
+n2: n2:51451:51451 [0] NCCL INFO comm 0x5a03d0aa1a90 rank 1 nranks 2 cudaDev 0 busId 1000 - Destroy COMPLETE
+n1: n1:129926:129926 [0] NCCL INFO comm 0x62d8fe8803e0 rank 0 nranks 2 cudaDev 0 busId 1000 - Destroy COMPLETE
+n2: [2026-03-16 10:31:02,014] [INFO] [launch.py:367:main] Process 51451 exits successfully.
+n1: [2026-03-16 10:31:00,952] [INFO] [launch.py:367:main] Process 129926 exits successfully.

@@ -9,9 +9,11 @@ import json
 import deepspeed
 import torch
 from huggingface_hub import snapshot_download
-from transformers import AutoConfig, AutoModelForCausalLM, AutoTokenizer, LlamaTokenizerFast, Qwen3VLForConditionalGeneration, AutoProcessor
+from transformers import AutoConfig, AutoModelForCausalLM, AutoTokenizer, LlamaTokenizerFast, Qwen3VLForConditionalGeneration, AutoProcessor, Qwen2_5_VLForConditionalGeneration
+from qwen_vl_utils import process_vision_info
 from deepspeed.accelerator import get_accelerator
 from safetensors import safe_open
+import time
 
 def inspect_model(model: FSDPModule):
     # assert isinstance(model, Transformer)
@@ -60,8 +62,10 @@ class DSPipeline():
         else:
             self.device = torch.device(get_accelerator().device_name(device))
 
-        self.processor = AutoProcessor.from_pretrained(self.model_name, dtype=self.dtype)
+        # self.processor = AutoProcessor.from_pretrained(self.model_name, dtype=self.dtype)
+        self.processor = AutoProcessor.from_pretrained("Qwen/Qwen2.5-VL-3B-Instruct", dtype=self.dtype)
         self.processor.tokenizer.padding_side = 'left'
+        self.feats = []
 
         if (is_meta):
             # self.config = AutoConfig.from_pretrained(self.model_name, trust_remote_code=trust_remote_code)
@@ -69,9 +73,15 @@ class DSPipeline():
 
             # with deepspeed.OnDevice(dtype=self.dtype, device="meta"):
             #     self.model = Qwen3VLForConditionalGeneration._from_config(self.config)
-            self.model = Qwen3VLForConditionalGeneration.from_pretrained(self.model_name, dtype=torch.bfloat16, device_map = "cpu")
+            # self.model = Qwen3VLForConditionalGeneration.from_pretrained(self.model_name, dtype=torch.bfloat16, device_map = "cpu")
+            self.model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
+                "Qwen/Qwen2.5-VL-3B-Instruct", torch_dtype="bfloat16", device_map="cpu"
+            )
         else:
-            self.model = Qwen3VLForConditionalGeneration.from_pretrained(self.model_name, trust_remote_code=trust_remote_code)
+            # self.model = Qwen3VLForConditionalGeneration.from_pretrained(self.model_name, trust_remote_code=trust_remote_code)
+            self.model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
+                "Qwen/Qwen2.5-VL-3B-Instruct", torch_dtype="bfloat16"
+            )
 
         self.model.eval()
         print("\n\ndtype:",self.model.dtype,"\n\n")
@@ -80,14 +90,14 @@ class DSPipeline():
             self.model.half()
         elif self.dtype == torch.bfloat16:
             self.model.bfloat16()
-        self.model.model.language_model.layers[0].register_forward_hook(self._hook)
+        for layer in self.model.model.language_model.layers:
+            layer.mlp.register_forward_hook(self._hook)
         print("\n\ndtype2:",self.model.dtype,"\n\n")
 
 
-    def _hook(self, module, input, output):
-        feats = {}
-        feats['feat'] = output.detach().float().cpu().tolist()
-        json.dump(feats, open("activation.json", "w"))
+    def _hook(self, module, input, output):        
+        self.feats.append(output.detach().float().cpu().tolist())
+        
 
     def __call__(self,
                  inputs=["test"],
@@ -149,19 +159,22 @@ class DSPipeline():
                     {
                         "type": "image",
                         # "image": "https://qianwen-res.oss-cn-beijing.aliyuncs.com/Qwen-VL/assets/demo.jpeg",
-                        "image": "demo.jpeg",
+                        # "image": "demo.jpeg",
+                        "image": "https://raw.githubusercontent.com/KhaledAbuQ/ML_Project/main/Lab_Test.jpg"
                     },
                     {"type": "text", "text": "Describe this image."},
                 ],
             }
         ]
-
-
-        inputs = self.processor.apply_chat_template(
-            messages,
-            tokenize=True,
-            add_generation_prompt=True,
-            return_dict=True,
+        text = self.processor.apply_chat_template(
+            messages, tokenize=False, add_generation_prompt=True
+        )
+        image_inputs, video_inputs = process_vision_info(messages)
+        inputs = self.processor(
+            text=[text],
+            images=image_inputs,
+            videos=video_inputs,
+            padding=True,
             return_tensors="pt",
         )
         inputs = inputs.to(self.device)
@@ -182,10 +195,16 @@ class DSPipeline():
         # self.model.to(self.device)
         if rank == 1: 
             save_model_weight_stats(self.model, "qwen3_weight_stats_dist_rank1.json")
+        start = time.time()
         generated_ids = self.model.generate(**inputs, max_new_tokens=num_tokens, do_sample=do_sample)
+        gen_time = time.time()-start
         generated_ids_trimmed = [
             out_ids[len(in_ids) :] for in_ids, out_ids in zip(inputs.input_ids, generated_ids)
         ]
+        print("generated_ids_trimmed:", len(generated_ids_trimmed[0]))
+        print("Tokens per second:",len(generated_ids_trimmed[0])/gen_time)
+        self.feats = {f"layer{i}_text_decoder_out":activation for i,activation in enumerate(self.feats)}
+        json.dump(self.feats, open("activations.json","w"))
         # print("generted_ids:")
         # for i in generated_ids[0].detach().cpu():
         #     print(i, end=", ")

@@ -5,3 +5,6 @@ archive
 archive.zip
 __pycache__
 face2comics*
+activation.json
+activations.json
+qwen3_weight*
