@@ -9,11 +9,13 @@ import json
 import deepspeed
 import torch
 from huggingface_hub import snapshot_download
-from transformers import AutoConfig, AutoModelForCausalLM, AutoTokenizer, LlamaTokenizerFast, Qwen3VLForConditionalGeneration, AutoProcessor, Qwen2_5_VLForConditionalGeneration
 from qwen_vl_utils import process_vision_info
 from deepspeed.accelerator import get_accelerator
 from safetensors import safe_open
 import time
+import requests
+from PIL import Image
+from transformers import AutoProcessor, Gemma3ForConditionalGeneration
 
 def inspect_model(model: FSDPModule):
     # assert isinstance(model, Transformer)
@@ -62,8 +64,7 @@ class DSPipeline():
         else:
             self.device = torch.device(get_accelerator().device_name(device))
 
-        # self.processor = AutoProcessor.from_pretrained(self.model_name, dtype=self.dtype)
-        self.processor = AutoProcessor.from_pretrained("Qwen/Qwen2.5-VL-3B-Instruct", dtype=self.dtype)
+        self.processor = AutoProcessor.from_pretrained(self.model_name, dtype=self.dtype)
         self.processor.tokenizer.padding_side = 'left'
         self.feats = []
 
@@ -74,13 +75,13 @@ class DSPipeline():
             # with deepspeed.OnDevice(dtype=self.dtype, device="meta"):
             #     self.model = Qwen3VLForConditionalGeneration._from_config(self.config)
             # self.model = Qwen3VLForConditionalGeneration.from_pretrained(self.model_name, dtype=torch.bfloat16, device_map = "cpu")
-            self.model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
-                "Qwen/Qwen2.5-VL-3B-Instruct", torch_dtype="bfloat16", device_map="cpu"
+            self.model = Gemma3ForConditionalGeneration.from_pretrained(
+                self.model_name, torch_dtype="bfloat16", device_map="cpu", #quantization_config=BitsAndBytesConfig(load_in_8bit=True),
             )
         else:
             # self.model = Qwen3VLForConditionalGeneration.from_pretrained(self.model_name, trust_remote_code=trust_remote_code)
-            self.model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
-                "Qwen/Qwen2.5-VL-3B-Instruct", torch_dtype="bfloat16"
+            self.model = Gemma3ForConditionalGeneration.from_pretrained(
+                self.model_name, torch_dtype="bfloat16", #quantization_config=BitsAndBytesConfig(load_in_8bit=True),
             )
 
         self.model.eval()
@@ -90,9 +91,9 @@ class DSPipeline():
             self.model.half()
         elif self.dtype == torch.bfloat16:
             self.model.bfloat16()
-        for layer in self.model.model.language_model.layers:
-            layer.mlp.register_forward_hook(self._hook)
-        print("\n\ndtype2:",self.model.dtype,"\n\n")
+        # for layer in self.model.model.language_model.layers:
+        #     layer.mlp.register_forward_hook(self._hook)
+        # print("\n\ndtype2:",self.model.dtype,"\n\n")
 
 
     def _hook(self, module, input, output):        
@@ -136,84 +137,37 @@ class DSPipeline():
                          inputs=["Describe this image:"],
                          num_tokens=100,
                          do_sample=False, rank=None):
-        # print("generate_outputs called")
-        # conversations = [
-        #     [
-        #         {
-        #             "role": "user",
-        #             "content": [
-        #                 {
-        #                     "type": "image",
-        #                     "image": "https://qianwen-res.oss-cn-beijing.aliyuncs.com/Qwen-VL/assets/demo.jpeg",
-        #                 },
-        #                 {"type": "text", "text": text_input},
-        #             ],
-        #         }
-        #     ]
-        #     for text_input in inputs
-        # ]
         messages = [
-            {
-                "role": "user",
-                "content": [
                     {
-                        "type": "image",
-                        # "image": "https://qianwen-res.oss-cn-beijing.aliyuncs.com/Qwen-VL/assets/demo.jpeg",
-                        # "image": "demo.jpeg",
-                        "image": "https://raw.githubusercontent.com/KhaledAbuQ/ML_Project/main/Lab_Test.jpg"
+                        "role": "system",
+                        "content": [{"type": "text", "text": "You are a helpful assistant."}]
                     },
-                    {"type": "text", "text": "Describe this image."},
-                ],
-            }
-        ]
-        text = self.processor.apply_chat_template(
-            messages, tokenize=False, add_generation_prompt=True
-        )
-        image_inputs, video_inputs = process_vision_info(messages)
-        inputs = self.processor(
-            text=[text],
-            images=image_inputs,
-            videos=video_inputs,
-            padding=True,
-            return_tensors="pt",
-        )
-        inputs = inputs.to(self.device)
-        print("Keys in inputs:", inputs.keys())
-        if "pixel_values" in inputs:
-            pv = inputs["pixel_values"]
-            print(f"pixel_values shape={pv.shape}, dtype={pv.dtype}, sum={pv.sum().item():.4f}")
-        else:
-            print("WARNING: pixel_values is MISSING from inputs")
-        if "pixel_values" in inputs:
-            inputs["pixel_values"] = inputs["pixel_values"].to(dtype=self.dtype)
-            print(f"pixel_values after cast: dtype={inputs['pixel_values'].dtype}, "
-                f"device={inputs['pixel_values'].device}, "
-                f"sum={inputs['pixel_values'].sum().item():.4f}")
-        print(f"image_grid_thw: {inputs['image_grid_thw']}, device={inputs['image_grid_thw'].device}")
-        
-        
-        # self.model.to(self.device)
+                    {
+                        "role": "user",
+                        "content": [
+                            {"type": "image", "image": "https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/bee.jpg"},
+                            {"type": "text", "text": "Describe this image in detail."}
+                        ]
+                    }
+                ]
+        inputs = self.processor.apply_chat_template(
+            messages, add_generation_prompt=True, tokenize=True,
+            return_dict=True, return_tensors="pt"
+        ).to(self.device, dtype=torch.bfloat16)
         if rank == 1: 
-            save_model_weight_stats(self.model, "qwen3_weight_stats_dist_rank1.json")
-        start = time.time()
-        generated_ids = self.model.generate(**inputs, max_new_tokens=num_tokens, do_sample=do_sample)
-        gen_time = time.time()-start
-        generated_ids_trimmed = [
-            out_ids[len(in_ids) :] for in_ids, out_ids in zip(inputs.input_ids, generated_ids)
-        ]
-        print("generated_ids_trimmed:", len(generated_ids_trimmed[0]))
-        print("Tokens per second:",len(generated_ids_trimmed[0])/gen_time)
-        self.feats = {f"layer{i}_text_decoder_out":activation for i,activation in enumerate(self.feats)}
-        json.dump(self.feats, open("activations.json","w"))
-        # print("generted_ids:")
-        # for i in generated_ids[0].detach().cpu():
-        #     print(i, end=", ")
-        # print("\n")
-        output_text = self.processor.batch_decode(
-            generated_ids_trimmed, skip_special_tokens=True, clean_up_tokenization_spaces=False
-        )
+            save_model_weight_stats(self.model, "gemma3_weight_stats_dist_rank1.json")
+        input_len = inputs["input_ids"].shape[-1]
+        self.model.to(self.device)
+        with torch.inference_mode():
+            start = time.time()
+            generation = self.model.generate(**inputs, max_new_tokens=100, do_sample=False)
+            gen_time = time.time()-start
+            generation = generation[0][input_len:]
+        print("generation:", len(generation[0]))
+        print("Tokens per second:",len(generation[0][input_len:])/gen_time)
+        decoded = self.processor.decode(generation, skip_special_tokens=True)
         
-        return output_text
+        return decoded
 def save_model_weight_stats(model, output_path="weight_stats.json"):
     stats_dict = {}
     

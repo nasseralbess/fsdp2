@@ -8,3 +8,8 @@ setuptools
 future
 consoleprinter
 transformers
+bitsandbytes
+setuptools
+psutil
+qwen-vl-utils
+accelerate

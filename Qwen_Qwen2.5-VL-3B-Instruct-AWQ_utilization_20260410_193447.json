@@ -1,0 +1,20 @@
+{
+    "timestamp": "20260410_193447",
+    "model_name": "Qwen/Qwen2.5-VL-3B-Instruct-AWQ",
+    "system_ram": {
+        "used_gb": 7.118412017822266,
+        "total_gb": 31.152572631835938,
+        "percent": 22.9
+    },
+    "system_cpu": {
+        "percent": 18.7
+    },
+    "gpu_vram": [
+        {
+            "device_id": 0,
+            "allocated_gb": 2.5907697677612305,
+            "reserved_gb": 2.7265625,
+            "max_allocated_gb": 2.590771198272705
+        }
+    ]
+}
