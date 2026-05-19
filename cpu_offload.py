@@ -1,24 +1,22 @@
-from transformers import AutoProcessor, Gemma3ForConditionalGeneration
+from transformers import AutoProcessor, Gemma3ForConditionalGeneration, Qwen3VLForConditionalGeneration
 import json
 from PIL import Image
 import requests
 import torch
 max_memory_mapping = {0: "13GB", "cpu":"29GB"}
 
-# model = Qwen3VLForConditionalGeneration.from_pretrained(
-#     "Qwen/Qwen3-VL-8B-Thinking", dtype="auto", device_map="auto"#, max_memory = max_memory_mapping
-# )
+model = Qwen3VLForConditionalGeneration.from_pretrained(
+    "Qwen/Qwen3-VL-8B-Thinking", dtype="auto", device_map="auto"#, max_memory = max_memory_mapping
+)
 
-# We recommend enabling flash_attention_2 for better acceleration and memory saving, especially in multi-image and video scenarios.
-# model = Qwen3VLForConditionalGeneration.from_pretrained(
-#     "Qwen/Qwen3-VL-8B-Thinking",
-#     dtype=torch.bfloat16,
-#     attn_implementation="flash_attention_2",
-#     device_map="auto",
-# )
+model = Qwen3VLForConditionalGeneration.from_pretrained(
+    "Qwen/Qwen3-VL-8B-Thinking",
+    dtype=torch.bfloat16,
+    device_map="auto",
+)
 
-# processor = AutoProcessor.from_pretrained("Qwen/Qwen3-VL-8B-Thinking")
-# print(model)
+processor = AutoProcessor.from_pretrained("Qwen/Qwen3-VL-8B-Thinking")
+print(model.model.language_model.layers)
 
 def save_model_weight_stats(model, output_path="weight_stats.json"):
     stats_dict = {}
@@ -58,40 +56,40 @@ def save_model_weight_stats(model, output_path="weight_stats.json"):
 # save_model_weight_stats(model, "qwen3_weight_stats.json")
 
 
-model_id = "google/gemma-3-12b-it"
+# model_id = "google/gemma-3-12b-it"
 
-model = Gemma3ForConditionalGeneration.from_pretrained(
-    model_id, device_map="auto", max_memory = max_memory_mapping
-).eval()
+# model = Gemma3ForConditionalGeneration.from_pretrained(
+#     model_id, device_map="auto", max_memory = max_memory_mapping
+# ).eval()
 
 # print(model)
 
-processor = AutoProcessor.from_pretrained(model_id)
+# processor = AutoProcessor.from_pretrained(model_id)
 
-messages = [
-    {
-        "role": "system",
-        "content": [{"type": "text", "text": "You are a helpful assistant."}]
-    },
-    {
-        "role": "user",
-        "content": [
-            {"type": "image", "image": "https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/bee.jpg"},
-            {"type": "text", "text": "Describe this image in detail."}
-        ]
-    }
-]
+# messages = [
+#     {
+#         "role": "system",
+#         "content": [{"type": "text", "text": "You are a helpful assistant."}]
+#     },
+#     {
+#         "role": "user",
+#         "content": [
+#             {"type": "image", "image": "https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/bee.jpg"},
+#             {"type": "text", "text": "Describe this image in detail."}
+#         ]
+#     }
+# ]
 
-inputs = processor.apply_chat_template(
-    messages, add_generation_prompt=True, tokenize=True,
-    return_dict=True, return_tensors="pt"
-).to(model.device, dtype=torch.bfloat16)
+# inputs = processor.apply_chat_template(
+#     messages, add_generation_prompt=True, tokenize=True,
+#     return_dict=True, return_tensors="pt"
+# ).to(model.device, dtype=torch.bfloat16)
 
-input_len = inputs["input_ids"].shape[-1]
+# input_len = inputs["input_ids"].shape[-1]
 
-with torch.inference_mode():
-    generation = model.generate(**inputs, max_new_tokens=100, do_sample=False)
-    generation = generation[0][input_len:]
+# with torch.inference_mode():
+#     generation = model.generate(**inputs, max_new_tokens=100, do_sample=False)
+#     generation = generation[0][input_len:]
 
-decoded = processor.decode(generation, skip_special_tokens=True)
-print(decoded)
+# decoded = processor.decode(generation, skip_special_tokens=True)
+# print(decoded)

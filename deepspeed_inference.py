@@ -22,7 +22,7 @@ os.environ["NCCL_DEBUG"]="INFO"
 
 deepspeed.init_distributed(dist_backend="nccl")
 
-local_rank = int(os.environ.get("LOCAL_RANK", 0))
+local_rank = int(os.environ.get("RANK", 0))
 world_size = int(os.environ.get("WORLD_SIZE", 1))
 
 if args.hf_baseline and world_size > 1:
@@ -38,7 +38,7 @@ t0 = time.time()
 pipe = DSPipeline(model_name=args.model,
                 dtype=data_type,
                 is_meta=True,
-                device=local_rank,
+                device=0,
                 checkpoint_path=args.checkpoint_path,
                 trust_remote_code=args.trust_remote_code)
 
@@ -121,29 +121,28 @@ input_sentences = ["Describe this image:"]
 if args.batch_size > len(input_sentences):
     input_sentences *= math.ceil(args.batch_size / len(input_sentences))
 
-inputs = input_sentences[:args.batch_size]
-
+inputs=[{"text":"Describe this image:", "image":"https://qianwen-res.oss-cn-beijing.aliyuncs.com/Qwen-VL/assets/demo.jpeg"}]
 # iters = 30 if args.test_performance else 2
-iters = 30
+iters = 1
 times = []
 for i in range(iters):
     get_accelerator().synchronize()
     start = time.time()
-    log_thread = threading.Thread(target=log_resource_utilization, args=(args.model,))
-    log_thread.start()
+    # log_thread = threading.Thread(target=log_resource_utilization, args=(args.model,))
+    # log_thread.start()
     outputs = pipe(inputs,
             num_tokens=args.max_new_tokens,
             do_sample=(not args.greedy), rank = torch.distributed.get_rank())
-    log_thread.join()
+    # log_thread.join()
     
     get_accelerator().synchronize()
     end = time.time()
     times.append(end - start)
 
-if local_rank == 0:
-    print(f"generation time is {times[-1]} sec")
-    for i, o in zip(inputs, outputs):
-        print(f"\nin={i}\nout={o}\n{'-'*60}")
-    if args.test_performance:
-        Performance.print_perf_stats(map(lambda t: t / args.max_new_tokens, times), pipe.model.config, args.dtype, args.batch_size)
+    if local_rank == 0:
+        print(f"generation time is {times[-1]} sec")
+        for i, o in zip(inputs, outputs):
+            print(f"\nin={i}\nout={o}\n{'-'*60}")
+        if args.test_performance:
+            Performance.print_perf_stats(map(lambda t: t / args.max_new_tokens, times), pipe.model.config, args.dtype, args.batch_size)
 torch.distributed.destroy_process_group()

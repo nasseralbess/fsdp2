@@ -18,6 +18,45 @@ from PIL import Image
 from transformers import AutoProcessor,  Qwen3VLForConditionalGeneration
 
 
+def make_hook(layer_id):
+    def hook(module, input, output):
+        # original_dtype = output.dtype
+        # original_device = output.device
+
+        # sae = layer_SAEs[layer_id]
+
+        # try:
+        #     feature_index = feature_indices[str(layer_id)]
+        # except:
+        #     feature_index = feature_indices[int(layer_id)]
+
+        # if isinstance(feature_index, int):
+        #     feature_index = [feature_index]
+        
+        # encoded = sae.encode(output)
+
+        # x = encoded[:, :, [feature_index]]
+
+        # mean = x.mean()
+        # x = torch.where(x == 0, mean * alpha, x * alpha)
+
+        # encoded[:, :, [feature_index]] = x
+        # decoded = sae.decode(encoded)
+
+        # return decoded.to(device=original_device, dtype=original_dtype)
+        # output.zero_()
+        # print("in hook:",layer_id)
+        # print("OUTPUT SHAPE:",output.shape, "layer id:",layer_id)
+
+        print("Before intervention:", output)
+        output.zero_()
+        print("After intervention:", output)
+        return output
+
+    return hook
+    # def _hook(self, module, input, output):        
+    #     self.feats.append(output.detach().float().cpu().tolist())
+
 class DSPipeline():
     def __init__(self,
                 model_name='Qwen/Qwen3-VL-8B-Thinking',
@@ -59,49 +98,21 @@ class DSPipeline():
             self.model.half()
         elif self.dtype == torch.bfloat16:
             self.model.bfloat16()
+        self.local_rank = int(os.environ.get("RANK", 0))
+        # print("\n\n",os.environ.items(),"\n\n")
+        # if self.local_rank==0:
         self.hook_handles = []
         for layer in self.layers_of_interest:
-            handle = self.model.model.language_model.layers[layer].mlp.register_forward_hook(
-                self.make_hook(layer)
+            print("registered hook for layer",layer)
+            handle = self.model.model.language_model.layers[layer].register_forward_hook(
+                make_hook(layer)
             )
             self.hook_handles.append(handle)
-
-    def make_hook(self,layer_id):
-        def hook(module, input, output):
-            # original_dtype = output.dtype
-            # original_device = output.device
-
-            # sae = layer_SAEs[layer_id]
-
-            # try:
-            #     feature_index = feature_indices[str(layer_id)]
-            # except:
-            #     feature_index = feature_indices[int(layer_id)]
-
-            # if isinstance(feature_index, int):
-            #     feature_index = [feature_index]
-            
-            # encoded = sae.encode(output)
-
-            # x = encoded[:, :, [feature_index]]
-
-            # mean = x.mean()
-            # x = torch.where(x == 0, mean * alpha, x * alpha)
-
-            # encoded[:, :, [feature_index]] = x
-            # decoded = sae.decode(encoded)
-
-            # return decoded.to(device=original_device, dtype=original_dtype)
-            return output.zero_()
-
-        return hook
-    # def _hook(self, module, input, output):        
-    #     self.feats.append(output.detach().float().cpu().tolist())
         
 
 
     def __call__(self,
-                inputs=["test"],
+                inputs=[{"text":"Describe this image:", "image":"https://qianwen-res.oss-cn-beijing.aliyuncs.com/Qwen-VL/assets/demo.jpeg"}],
                 num_tokens=100,
                 do_sample=False, rank=None):
         if isinstance(inputs, str):
@@ -143,29 +154,56 @@ class DSPipeline():
                 "content": [
                     {
                         "type": "image",
-                        "image": inputs["image"],
+                        "image": inputs[0]["image"],
                     },
-                    {"type": "text", "text": inputs["text"]},
+                    {"type": "text", "text": inputs[0]["text"]},
                 ],
             }
         ]
 
         inputs = self.processor.apply_chat_template(
-            messages, add_generation_prompt=True, tokenize=True,
-            return_dict=True, return_tensors="pt"
-        ).to(self.device, dtype=torch.bfloat16)
-        input_len = inputs["input_ids"].shape[-1]
-        self.model.to(self.device)
-        with torch.inference_mode():
-            start = time.time()
-            generation = self.model.generate(**inputs, max_new_tokens=100, do_sample=False)
-            gen_time = time.time()-start
-            generation = generation[0][input_len:]
-        print("generation:", len(generation[0]))
-        print("Tokens per second:",len(generation[0][input_len:])/gen_time)
-        decoded = self.processor.decode(generation, skip_special_tokens=True)
+            messages,
+            tokenize=True,
+            add_generation_prompt=True,
+            return_dict=True,
+            return_tensors="pt",
+        )
+        inputs = inputs.to(self.device)
+        # print("Keys in inputs:", inputs.keys())
+        # if "pixel_values" in inputs:
+        #     pv = inputs["pixel_values"]
+        #     print(f"pixel_values shape={pv.shape}, dtype={pv.dtype}, sum={pv.sum().item():.4f}")
+        # else:
+        #     print("WARNING: pixel_values is MISSING from inputs")
+        # if "pixel_values" in inputs:
+        #     inputs["pixel_values"] = inputs["pixel_values"].to(dtype=self.dtype)
+        #     print(f"pixel_values after cast: dtype={inputs['pixel_values'].dtype}, "
+        #         f"device={inputs['pixel_values'].device}, "
+        #         f"sum={inputs['pixel_values'].sum().item():.4f}")
+        # print(f"image_grid_thw: {inputs['image_grid_thw']}, device={inputs['image_grid_thw'].device}")
         
-        return decoded
+        
+        # self.model.to(self.device)
+        # if rank == 1: 
+        #     save_model_weight_stats(self.model, "qwen3_weight_stats_dist_rank1.json")
+        start = time.time()
+        generated_ids = self.model.generate(**inputs, max_new_tokens=num_tokens, do_sample=do_sample)
+        gen_time = time.time()-start
+        generated_ids_trimmed = [
+            out_ids[len(in_ids) :] for in_ids, out_ids in zip(inputs.input_ids, generated_ids)
+        ]
+        print("generated_ids_trimmed:", len(generated_ids_trimmed[0]))
+        print("Tokens per second:",len(generated_ids_trimmed[0])/gen_time)
+        # print("generted_ids:")
+        # for i in generated_ids[0].detach().cpu():
+        #     print(i, end=", ")
+        # print("\n")
+        output_text = self.processor.batch_decode(
+            generated_ids_trimmed, skip_special_tokens=True, clean_up_tokenization_spaces=False
+        )
+        
+        return output_text
+
 def save_model_weight_stats(model, output_path="weight_stats.json"):
     stats_dict = {}
     
