@@ -11,8 +11,7 @@ import json
 import psutil
 from datetime import datetime
 import threading
-from transformers.models.gemma3.modeling_gemma3 import Gemma3DecoderLayer
-from transformers.models.siglip.modeling_siglip import SiglipEncoderLayer
+from transformers.models.qwen3_vl.modeling_qwen3_vl import Qwen3VLTextDecoderLayer
 args = parser.parse_args()
 
 
@@ -37,11 +36,11 @@ if local_rank == 0:
 t0 = time.time()
 
 pipe = DSPipeline(model_name=args.model,
-                  dtype=data_type,
-                  is_meta=True,
-                  device=local_rank,
-                  checkpoint_path=args.checkpoint_path,
-                  trust_remote_code=args.trust_remote_code)
+                dtype=data_type,
+                is_meta=True,
+                device=local_rank,
+                checkpoint_path=args.checkpoint_path,
+                trust_remote_code=args.trust_remote_code)
 
 if local_rank == 0:
     print(f"initialization time: {(time.time()-t0) * 1000}ms")
@@ -50,8 +49,7 @@ if local_rank == 0:
 ds_kwargs = dict(base_dir=pipe.repo_root, checkpoint=pipe.checkpoints_json)
 
 injection_policy = {
-    Gemma3DecoderLayer: ("self_attn.o_proj", "mlp.down_proj"),
-    SiglipEncoderLayer: ("self_attn.out_proj", "mlp.fc2")
+    Qwen3VLTextDecoderLayer: ("self_attn.o_proj", "mlp.down_proj"),
 }
 
 def log_resource_utilization(model_name: str, output_dir: str = "."):
@@ -111,8 +109,6 @@ pipe.model = deepspeed.init_inference(
     save_mp_checkpoint_path=args.save_mp_checkpoint_path,
     **ds_kwargs
 )
-if "AWQ" in args.model:
-    pipe.model.module.visual = visual_module.to(local_rank)
 
 print_weight_sample(pipe.model.module, "AFTER deepspeed")
 
@@ -128,7 +124,7 @@ if args.batch_size > len(input_sentences):
 inputs = input_sentences[:args.batch_size]
 
 # iters = 30 if args.test_performance else 2
-iters = 1
+iters = 30
 times = []
 for i in range(iters):
     get_accelerator().synchronize()

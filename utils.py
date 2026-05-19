@@ -15,43 +15,18 @@ from safetensors import safe_open
 import time
 import requests
 from PIL import Image
-from transformers import AutoProcessor, Gemma3ForConditionalGeneration
-
-def inspect_model(model: FSDPModule):
-    # assert isinstance(model, Transformer)
-    assert isinstance(model, FSDPModule)
-
-    # if torch.distributed.get_rank() == 0:
-    print(model)
-
-    for param in model.parameters():
-        assert param.placements == (Shard(0),)
-        # assert param.dtype == torch.float32
-        # print(param.get_local_tensor())
-
-
-def inspect_mixed_precision(model: FSDPModule):
-    model.unshard()
-    for param in model.parameters(recurse=False):
-        assert param.dtype == torch.bfloat16
-    model.reshard()
-
-
-'''
-Helper classes and functions for DeepSpeed
-'''
-
+from transformers import AutoProcessor,  Qwen3VLForConditionalGeneration
 
 
 class DSPipeline():
     def __init__(self,
-                 model_name='Qwen/Qwen3-VL-8B-Thinking',
-                 dtype=torch.bfloat16,
-                 is_meta=True,
-                 device="cuda:0",
-                 checkpoint_path=None,
-                 trust_remote_code=True,
-                 ):
+                model_name='Qwen/Qwen3-VL-8B-Thinking',
+                dtype=torch.bfloat16,
+                is_meta=True,
+                device="cuda:0",
+                checkpoint_path=None,
+                trust_remote_code=True,
+                ):
         self.model_name = model_name
         self.dtype = dtype
 
@@ -67,22 +42,15 @@ class DSPipeline():
         self.processor = AutoProcessor.from_pretrained(self.model_name, dtype=self.dtype)
         self.processor.tokenizer.padding_side = 'left'
         self.feats = []
+        self.layers_of_interest = [5, 10, 15, 20, 30, 35]
 
         if (is_meta):
             # self.config = AutoConfig.from_pretrained(self.model_name, trust_remote_code=trust_remote_code)
             self.repo_root, self.checkpoints_json = self._generate_json(checkpoint_path)
 
-            # with deepspeed.OnDevice(dtype=self.dtype, device="meta"):
-            #     self.model = Qwen3VLForConditionalGeneration._from_config(self.config)
-            # self.model = Qwen3VLForConditionalGeneration.from_pretrained(self.model_name, dtype=torch.bfloat16, device_map = "cpu")
-            self.model = Gemma3ForConditionalGeneration.from_pretrained(
-                self.model_name, torch_dtype="bfloat16", device_map="cpu", #quantization_config=BitsAndBytesConfig(load_in_8bit=True),
-            )
+            self.model = Qwen3VLForConditionalGeneration.from_pretrained(self.model_name, dtype=torch.bfloat16, device_map = "cpu")
         else:
-            # self.model = Qwen3VLForConditionalGeneration.from_pretrained(self.model_name, trust_remote_code=trust_remote_code)
-            self.model = Gemma3ForConditionalGeneration.from_pretrained(
-                self.model_name, torch_dtype="bfloat16", #quantization_config=BitsAndBytesConfig(load_in_8bit=True),
-            )
+            self.model = Qwen3VLForConditionalGeneration.from_pretrained(self.model_name, trust_remote_code=trust_remote_code)
 
         self.model.eval()
         print("\n\ndtype:",self.model.dtype,"\n\n")
@@ -91,19 +59,51 @@ class DSPipeline():
             self.model.half()
         elif self.dtype == torch.bfloat16:
             self.model.bfloat16()
-        # for layer in self.model.model.language_model.layers:
-        #     layer.mlp.register_forward_hook(self._hook)
-        # print("\n\ndtype2:",self.model.dtype,"\n\n")
+        self.hook_handles = []
+        for layer in self.layers_of_interest:
+            handle = self.model.model.language_model.layers[layer].mlp.register_forward_hook(
+                self.make_hook(layer)
+            )
+            self.hook_handles.append(handle)
 
+    def make_hook(self,layer_id):
+        def hook(module, input, output):
+            # original_dtype = output.dtype
+            # original_device = output.device
 
-    def _hook(self, module, input, output):        
-        self.feats.append(output.detach().float().cpu().tolist())
+            # sae = layer_SAEs[layer_id]
+
+            # try:
+            #     feature_index = feature_indices[str(layer_id)]
+            # except:
+            #     feature_index = feature_indices[int(layer_id)]
+
+            # if isinstance(feature_index, int):
+            #     feature_index = [feature_index]
+            
+            # encoded = sae.encode(output)
+
+            # x = encoded[:, :, [feature_index]]
+
+            # mean = x.mean()
+            # x = torch.where(x == 0, mean * alpha, x * alpha)
+
+            # encoded[:, :, [feature_index]] = x
+            # decoded = sae.decode(encoded)
+
+            # return decoded.to(device=original_device, dtype=original_dtype)
+            return output.zero_()
+
+        return hook
+    # def _hook(self, module, input, output):        
+    #     self.feats.append(output.detach().float().cpu().tolist())
         
 
+
     def __call__(self,
-                 inputs=["test"],
-                 num_tokens=100,
-                 do_sample=False, rank=None):
+                inputs=["test"],
+                num_tokens=100,
+                do_sample=False, rank=None):
         if isinstance(inputs, str):
             inputs = [inputs]
 
@@ -113,10 +113,10 @@ class DSPipeline():
     def _generate_json(self, checkpoint_path=None):
         if checkpoint_path is None:
             repo_root = snapshot_download(self.model_name,
-                                          allow_patterns=["*"],
-                                          cache_dir=os.getenv("TRANSFORMERS_CACHE", None),
-                                          local_files_only=False,
-                                          revision=None)
+                                        allow_patterns=["*"],
+                                        cache_dir=os.getenv("TRANSFORMERS_CACHE", None),
+                                        local_files_only=False,
+                                        revision=None)
         else:
             assert os.path.exists(checkpoint_path)
             repo_root = checkpoint_path
@@ -134,28 +134,26 @@ class DSPipeline():
         return repo_root, checkpoints_json
 
     def generate_outputs(self,
-                         inputs=["Describe this image:"],
-                         num_tokens=100,
-                         do_sample=False, rank=None):
+                        inputs=[{"text":"Describe this image:", "image":"https://qianwen-res.oss-cn-beijing.aliyuncs.com/Qwen-VL/assets/demo.jpeg"}],
+                        num_tokens=100,
+                        do_sample=False, rank=None):
         messages = [
+            {
+                "role": "user",
+                "content": [
                     {
-                        "role": "system",
-                        "content": [{"type": "text", "text": "You are a helpful assistant."}]
+                        "type": "image",
+                        "image": inputs["image"],
                     },
-                    {
-                        "role": "user",
-                        "content": [
-                            {"type": "image", "image": "https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/bee.jpg"},
-                            {"type": "text", "text": "Describe this image in detail."}
-                        ]
-                    }
-                ]
+                    {"type": "text", "text": inputs["text"]},
+                ],
+            }
+        ]
+
         inputs = self.processor.apply_chat_template(
             messages, add_generation_prompt=True, tokenize=True,
             return_dict=True, return_tensors="pt"
         ).to(self.device, dtype=torch.bfloat16)
-        if rank == 1: 
-            save_model_weight_stats(self.model, "gemma3_weight_stats_dist_rank1.json")
         input_len = inputs["input_ids"].shape[-1]
         self.model.to(self.device)
         with torch.inference_mode():
