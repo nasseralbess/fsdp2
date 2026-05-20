@@ -16,42 +16,47 @@ import time
 import requests
 from PIL import Image
 from transformers import AutoProcessor,  Qwen3VLForConditionalGeneration
+from dictionary_learning import utils
+SAES_ROOT = "saes"
+ARCHITECTURE = "TopKTrainer"
 
+layers_of_interest = [5, 10, 15, 20, 30, 35]
+
+layer_SAEs = {}
+for layer in layers_of_interest:
+    trained_sae, _ = utils.load_dictionary(
+        os.path.join(SAES_ROOT, f"qwen_activations_{layer}_{ARCHITECTURE}_wandb", "trainer_0"),
+        device="cuda:0",
+    )
+    trained_sae.eval()
+    layer_SAEs[layer] = trained_sae
 
 def make_hook(layer_id):
     def hook(module, input, output):
-        # original_dtype = output.dtype
-        # original_device = output.device
+        original_dtype = output.dtype
+        original_device = output.device
 
-        # sae = layer_SAEs[layer_id]
+        sae = layer_SAEs[layer_id]
 
-        # try:
-        #     feature_index = feature_indices[str(layer_id)]
-        # except:
-        #     feature_index = feature_indices[int(layer_id)]
+        try:
+            feature_index = feature_indices[str(layer_id)]
+        except:
+            feature_index = feature_indices[int(layer_id)]
 
-        # if isinstance(feature_index, int):
-        #     feature_index = [feature_index]
+        if isinstance(feature_index, int):
+            feature_index = [feature_index]
         
-        # encoded = sae.encode(output)
+        encoded = sae.encode(output)
 
-        # x = encoded[:, :, [feature_index]]
+        x = encoded[:, :, [feature_index]]
 
-        # mean = x.mean()
-        # x = torch.where(x == 0, mean * alpha, x * alpha)
+        mean = x.mean()
+        x = torch.where(x == 0, mean * alpha, x * alpha)
 
-        # encoded[:, :, [feature_index]] = x
-        # decoded = sae.decode(encoded)
+        encoded[:, :, [feature_index]] = x
+        decoded = sae.decode(encoded)
 
-        # return decoded.to(device=original_device, dtype=original_dtype)
-        # output.zero_()
-        # print("in hook:",layer_id)
-        # print("OUTPUT SHAPE:",output.shape, "layer id:",layer_id)
-
-        print("Before intervention:", output)
-        output.zero_()
-        print("After intervention:", output)
-        return output
+        return decoded.to(device=original_device, dtype=original_dtype)
 
     return hook
     # def _hook(self, module, input, output):        
@@ -81,7 +86,7 @@ class DSPipeline():
         self.processor = AutoProcessor.from_pretrained(self.model_name, dtype=self.dtype)
         self.processor.tokenizer.padding_side = 'left'
         self.feats = []
-        self.layers_of_interest = [5, 10, 15, 20, 30, 35]
+        self.layers_of_interest = layers_of_interest
 
         if (is_meta):
             # self.config = AutoConfig.from_pretrained(self.model_name, trust_remote_code=trust_remote_code)
@@ -99,6 +104,7 @@ class DSPipeline():
         elif self.dtype == torch.bfloat16:
             self.model.bfloat16()
         self.local_rank = int(os.environ.get("RANK", 0))
+        
         # print("\n\n",os.environ.items(),"\n\n")
         # if self.local_rank==0:
         self.hook_handles = []
