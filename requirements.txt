@@ -13,3 +13,4 @@ setuptools
 psutil
 qwen-vl-utils
 accelerate
+dictionary-learning
